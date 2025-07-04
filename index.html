@@ -36,10 +36,7 @@
       text-align: center;
       flex: 1;
     }
-    nav .nav-center img {
-      max-height: 50px;
-    }
-    nav .nav-right a {
+    nav .nav-center a {
       color: white;
       margin: 0 10px;
       text-decoration: none;
@@ -47,6 +44,19 @@
       text-transform: uppercase;
       letter-spacing: 0.5px;
       font-size: 0.95rem;
+    }
+    nav .nav-right {
+      text-align: right;
+    }
+    nav .nav-right button {
+      background-color: white;
+      color: #2e8b57;
+      border-radius: 25px;
+      padding: 8px 18px;
+      border: none;
+      margin-left: 10px;
+      font-weight: bold;
+      cursor: pointer;
     }
     nav h1 {
       color: white;
@@ -136,14 +146,15 @@
         <p>Guinness Yoga Record Holder</p>
       </div>
       <div class="nav-center">
-        <img src="https://cdn-icons-png.flaticon.com/512/2331/2331970.png" alt="Yoga Logo">
-      </div>
-      <div class="nav-right">
         <a href="#home">Home</a>
         <a href="#about">About</a>
         <a href="#courses">Courses</a>
         <a href="#gallery">Gallery</a>
         <a href="#contact">Contact</a>
+      </div>
+      <div class="nav-right">
+        <button>Login</button>
+        <button>Sign Up</button>
       </div>
     </div>
   </nav>
