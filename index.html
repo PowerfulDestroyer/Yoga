@@ -4,10 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Prince of Host Yoga Academy - Guinness World Record Holder</title>
+  <meta name="description" content="Join world-class yoga sessions in Chennai with Prince of Host, Guinness World Record Holder. Transform your body and mind through holistic yoga courses for all levels.">
+  <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f9d8-200d-2642-fe0f.png">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins&display=swap" rel="stylesheet">
   <style>
     :root {
-      --about-bg: #fce4ec;
+      --about-bg: #e3f2fd; /* Calming blue for About section */
       --courses-bg: #e3f2fd;
       --gallery-bg: #e0f7fa;
       --contact-bg: #f1f8e9;
@@ -85,7 +87,6 @@
       background: #388e3c;
     }
 
-    /* Hero section with background image overlay and subtitle */
     .hero {
       background: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.35)),
                   url('https://images.unsplash.com/photo-1551524551-44a0b6e8e7bc') 
@@ -106,7 +107,7 @@
     }
     .hero .subtitle {
       font-size: 1.27rem;
-      color: #fce4ec;
+      color: #e3f2fd;
       margin: 0 auto 1.2rem auto;
       font-weight: 500;
       letter-spacing: 0.03em;
@@ -136,7 +137,6 @@
       transform: scale(1.05);
     }
 
-    /* SVG wave divider */
     .wave-separator {
       line-height: 0;
       margin: 0;
@@ -148,7 +148,6 @@
       cursor: pointer;
     }
 
-    /* Section layout */
     .section {
       padding: 3rem 1rem;
       max-width: 1000px;
@@ -224,7 +223,6 @@
     #gallery { background: var(--gallery-bg); }
     #contact { background: var(--contact-bg); }
 
-    /* Contact Socials */
     .contact-socials {
       margin-top: 1.5rem;
       display: flex;
@@ -241,7 +239,6 @@
       filter: brightness(1.22);
     }
 
-    /* Contact Form */
     .contact-form {
       margin: 2.5rem auto 0 auto;
       max-width: 540px;
@@ -290,12 +287,18 @@
       background: #388e3c;
       transform: scale(1.04);
     }
+    .formspree-success {
+      display: none;
+      color: var(--main-green);
+      margin-top: 10px;
+      text-align: center;
+      font-weight: 500;
+      font-size: 1.1rem;
+    }
     @media (max-width: 700px) {
       .contact-form { padding: 1.1rem 0.4rem; }
       .contact-form .form-row { flex-direction: column; gap: 0.8rem; }
     }
-
-    /* Footer */
     footer {
       text-align: center;
       color: #888;
@@ -330,6 +333,24 @@
         if (rect.top < window.innerHeight - 50) {
           section.classList.add('visible');
         }
+      });
+
+      // Formspree AJAX Success Message
+      document.querySelectorAll('.contact-form').forEach(function(form){
+        form.addEventListener('submit', function(e){
+          e.preventDefault();
+          var data = new FormData(form);
+          fetch(form.action, {
+            method: 'POST',
+            body: data,
+            headers: { 'Accept': 'application/json' }
+          }).then(function(response){
+            if (response.ok) {
+              form.reset();
+              form.querySelector('.formspree-success').style.display = 'block';
+            }
+          });
+        });
       });
     });
   </script>
@@ -432,13 +453,14 @@
         <strong>Location:</strong> Yoga Street, Chennai, India
       </p>
     </div>
-    <form class="contact-form" method="post" action="mailto:info@yogaacademy.com" enctype="text/plain">
+    <form class="contact-form" action="https://formspree.io/f/xeokddlp" method="POST">
       <div class="form-row">
         <input type="text" name="name" placeholder="Your Name" required>
         <input type="email" name="email" placeholder="Your Email" required>
       </div>
       <textarea name="message" rows="4" placeholder="Your Message" required></textarea>
       <button type="submit">Send Message</button>
+      <div class="formspree-success">Thank you! Your message has been sent.</div>
     </form>
     <div class="contact-socials">
       <!-- Instagram -->
