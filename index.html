@@ -15,11 +15,22 @@
     }
     nav {
       background-color: #2E8B57;
-      padding: 0.8rem;
+      padding: 1.5rem 1rem;
       text-align: center;
       position: sticky;
       top: 0;
       z-index: 10;
+    }
+    nav h1 {
+      color: white;
+      font-size: 2rem;
+      margin: 0.2rem 0;
+      font-family: 'Playfair Display', serif;
+    }
+    nav p {
+      color: #d4f5e9;
+      font-size: 1rem;
+      margin: 0.2rem 0 1rem 0;
     }
     nav a {
       color: white;
@@ -27,22 +38,6 @@
       text-decoration: none;
       font-weight: bold;
       font-size: 1rem;
-    }
-    header {
-      background: linear-gradient(135deg, #a8edea, #fed6e3);
-      color: #333;
-      padding: 2rem 1rem;
-      text-align: center;
-      font-family: 'Playfair Display', serif;
-    }
-    header h1 {
-      font-size: 3rem;
-      margin-bottom: 0.5rem;
-      color: #2E8B57;
-    }
-    header p {
-      font-size: 1.2rem;
-      color: #555;
     }
     .hero {
       padding: 5rem 1rem 7rem 1rem;
@@ -131,17 +126,16 @@
 </head>
 <body>
   <nav>
-    <a href="#home">Home</a>
-    <a href="#about">About</a>
-    <a href="#classes">Classes</a>
-    <a href="#gallery">Gallery</a>
-    <a href="#contact">Contact</a>
-  </nav>
-
-  <header>
     <h1>Prince of Host Yoga Academy</h1>
     <p>Learn Yoga from a Guinness World Record Holder</p>
-  </header>
+    <div>
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#classes">Classes</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
 
   <section class="hero" id="home">
     <h1>Awaken Your Mind. Transform Your Body.</h1>
