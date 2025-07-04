@@ -3,10 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Yoga Academy Courses</title>
+  <title>Prince of Host Yoga Academy - Courses</title>
   <meta name="description" content="Browse beginner, intermediate, and advanced yoga courses at Prince of Host Yoga Academy.">
   <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f9d8-200d-2642-fe0f.png">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     :root {
       --about-bg: #e3f2fd;
@@ -15,10 +16,17 @@
       --testimonials-bg: #e8eaf6;
       --contact-bg: #f1f8e9;
       --main-green: #4caf50;
+      --main-green-dark: #388e3c;
       --main-pink: #d81b60;
       --main-blue: #1976d2;
       --main-cyan: #0097a7;
       --main-lime: #8bc34a;
+      --text-dark: #333;
+      --text-medium: #555;
+      --text-light: #777;
+      --shadow-sm: 0 2px 8px rgba(60,60,60,0.08);
+      --shadow-md: 0 4px 12px rgba(60,60,60,0.12);
+      --transition: all 0.3s ease;
     }
     html {
       scroll-behavior: smooth;
@@ -27,8 +35,8 @@
     body {
       font-family: 'Poppins', Arial, sans-serif;
       margin: 0;
-      background: #f7f9fa;
-      color: #333;
+      background: linear-gradient(135deg, #f7f9fa 0%, #e8f5e9 100%);
+      color: var(--text-dark);
       font-size: 1.15rem;
       line-height: 1.7;
       overflow-x: hidden;
@@ -38,10 +46,10 @@
       background: linear-gradient(90deg, #f8fafc 0%, #e8f5e9 100%);
       border-bottom: 1px solid #eee;
       min-height: 70px;
-      box-shadow: 0 2px 8px rgba(60,60,60,0.04);
+      box-shadow: var(--shadow-sm);
       position: sticky;
       top: 0;
-      z-index: 10;
+      z-index: 100;
       transition: min-height 0.25s;
     }
     @media (min-width: 900px) {
@@ -65,7 +73,7 @@
     .nav-left p {
       margin: 0;
       font-size: 1rem;
-      color: #777;
+      color: var(--text-light);
     }
     .nav-center {
       display: flex;
@@ -80,13 +88,27 @@
       margin: 0 1.2rem;
       text-decoration: none;
       font-weight: 500;
-      color: #333;
+      color: var(--text-dark);
       transition: color 0.2s;
       font-size: 1.03rem;
       white-space: nowrap;
+      position: relative;
     }
     .nav-center a:hover {
       color: var(--main-green);
+    }
+    .nav-center a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -4px;
+      left: 0;
+      background-color: var(--main-green);
+      transition: width 0.3s;
+    }
+    .nav-center a:hover::after {
+      width: 100%;
     }
     .nav-right {
       display: flex;
@@ -103,13 +125,15 @@
       color: white;
       font-size: 1rem;
       cursor: pointer;
-      transition: background 0.2s;
+      transition: var(--transition);
       margin-left: 0.2rem;
       margin-right: 0.2rem;
       white-space: nowrap;
+      box-shadow: 0 2px 5px rgba(76, 175, 80, 0.3);
     }
     .nav-right button:hover {
-      background: #388e3c;
+      background: var(--main-green-dark);
+      transform: translateY(-2px);
     }
     @media (max-width: 900px) {
       .nav-container {
@@ -147,22 +171,39 @@
       max-width: 950px;
       margin: 3rem auto 2rem auto;
       text-align: center;
-      background: #e3f2fd;
+      background: var(--courses-bg);
       border-radius: 20px;
       padding: 2.5rem 1rem;
-      box-shadow: 0 2px 8px rgba(60, 60, 60, 0.06);
+      box-shadow: var(--shadow-sm);
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(76, 175, 80, 0.2);
+    }
+    .courses-header::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
+      z-index: 0;
     }
     .courses-header h1 {
       font-family: 'Playfair Display', serif;
       color: var(--main-green);
-      font-size: 2.3rem;
+      font-size: 2.5rem;
       margin-bottom: 0.5rem;
+      position: relative;
+      z-index: 1;
     }
     .courses-header p {
-      color: #405060;
+      color: var(--text-medium);
       font-size: 1.17rem;
       max-width: 700px;
       margin: 0 auto;
+      position: relative;
+      z-index: 1;
     }
 
     .courses-main-content {
@@ -174,13 +215,13 @@
     }
     .courses-side-nav {
       background: #fff;
-      box-shadow: 0 2px 8px #0002;
+      box-shadow: var(--shadow-md);
       border-radius: 14px;
       padding: 1.2rem 1rem;
       min-width: 190px;
       max-width: 190px;
       position: sticky;
-      top: 110px; /* 110px so it sits below sticky navbar */
+      top: 110px;
       align-self: flex-start;
       margin-left: 0.5rem;
       z-index: 2;
@@ -188,7 +229,7 @@
     }
     .courses-side-nav h4 {
       font-size: 1.08rem;
-      color: #1976d2;
+      color: var(--main-blue);
       margin-bottom: 1.1rem;
       text-align: center;
       letter-spacing: 0.05em;
@@ -202,10 +243,10 @@
       margin: 0.7rem 0;
     }
     .courses-side-nav a {
-      color: #1976d2;
+      color: var(--main-blue);
       text-decoration: none;
       font-weight: 500;
-      transition: color 0.18s;
+      transition: var(--transition);
       font-size: 1.03rem;
       border-radius: 5px;
       padding: 4px 8px;
@@ -214,7 +255,7 @@
     .courses-side-nav a:hover,
     .courses-side-nav a.active {
       background: #e3f2fd;
-      color: #388e3c;
+      color: var(--main-green-dark);
     }
     .courses-sections {
       flex: 1 1 0;
@@ -226,21 +267,36 @@
       margin-bottom: 3.5rem;
       background: #fff;
       border-radius: 18px;
-      box-shadow: 0 2px 10px #b2dfdb21;
+      box-shadow: var(--shadow-sm);
       padding: 2.6rem 1.4rem;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(25, 118, 210, 0.1);
     }
     .course-section h2 {
       color: var(--main-green);
       font-family: 'Playfair Display', serif;
-      font-size: 2rem;
+      font-size: 2.2rem;
       margin-top: 0;
-      margin-bottom: 1rem;
+      margin-bottom: 1.5rem;
       text-align: left;
+      position: relative;
+      display: inline-block;
+    }
+    .course-section h2::after {
+      content: '';
+      position: absolute;
+      width: 70%;
+      height: 3px;
+      background: linear-gradient(to right, var(--main-green), transparent);
+      bottom: -8px;
+      left: 0;
     }
     .course-section .section-desc {
-      color: #405060;
+      color: var(--text-medium);
       margin-bottom: 2.2rem;
       font-size: 1.1rem;
+      max-width: 800px;
     }
     .courses-list {
       display: flex;
@@ -251,9 +307,9 @@
       margin: 0 auto;
     }
     .course-card {
-      background: #e8f5e9;
+      background: linear-gradient(to bottom, #e8f5e9 0%, #d0e8d0 100%);
       border-radius: 14px;
-      box-shadow: 0 1px 8px #0001;
+      box-shadow: var(--shadow-sm);
       width: 100%;
       max-width: 290px;
       min-width: 220px;
@@ -262,12 +318,31 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      transition: transform 0.15s, box-shadow 0.15s;
+      transition: var(--transition);
       margin-bottom: 0.5rem;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(76, 175, 80, 0.2);
+    }
+    .course-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: var(--main-green);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s ease;
+    }
+    .course-card:hover::before {
+      transform: scaleX(1);
     }
     .course-card:hover {
-      transform: scale(1.04) rotate(-1deg);
-      box-shadow: 0 8px 26px #1976d220;
+      transform: translateY(-8px);
+      box-shadow: 0 12px 24px rgba(25, 118, 210, 0.15);
     }
     .course-card img {
       width: 100%;
@@ -276,25 +351,48 @@
       border-radius: 12px;
       object-fit: cover;
       background: #fff;
-      box-shadow: 0 2px 8px #b2dfdb15;
+      box-shadow: 0 2px 8px rgba(178, 223, 219, 0.15);
       margin-bottom: 1.1rem;
+      transition: var(--transition);
+      border: 3px solid white;
+    }
+    .course-card:hover img {
+      transform: scale(1.05);
     }
     .course-card h3 {
-      font-size: 1.13rem;
-      color: #1976d2;
+      font-size: 1.2rem;
+      color: var(--main-blue);
       margin: 0 0 0.5rem 0;
       text-align: center;
+      font-weight: 600;
     }
     .course-card .days {
-      color: #388e3c;
-      font-size: 0.98rem;
+      color: var(--main-green-dark);
+      font-size: 1rem;
       font-weight: 500;
       margin-bottom: 0.6rem;
+      background: rgba(76, 175, 80, 0.1);
+      padding: 3px 12px;
+      border-radius: 20px;
     }
     .course-card .desc {
-      color: #444;
+      color: var(--text-medium);
       font-size: 0.97rem;
       text-align: center;
+      margin-bottom: 0.8rem;
+      min-height: 60px;
+    }
+    .course-card .instructor {
+      color: var(--text-light);
+      font-size: 0.9rem;
+      font-style: italic;
+      margin-top: auto;
+      margin-bottom: 0.5rem;
+    }
+    .course-card .price {
+      font-weight: 600;
+      color: var(--main-green-dark);
+      font-size: 1.1rem;
     }
     @media (max-width: 1150px) {
       .courses-main-content { max-width: 99vw; }
@@ -326,35 +424,212 @@
       .courses-list { flex-direction: column; align-items: center;}
       .course-card { min-width: 90vw; }
     }
+    
+    /* Modal Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.7);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .modal.active {
+      display: flex;
+      opacity: 1;
+    }
+    .modal-content {
+      background-color: #fff;
+      border-radius: 16px;
+      width: 90%;
+      max-width: 700px;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+      position: relative;
+      transform: translateY(30px);
+      transition: transform 0.4s ease;
+    }
+    .modal.active .modal-content {
+      transform: translateY(0);
+    }
+    .modal-close {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      font-size: 1.5rem;
+      color: var(--text-light);
+      cursor: pointer;
+      background: none;
+      border: none;
+      z-index: 10;
+      transition: var(--transition);
+    }
+    .modal-close:hover {
+      color: var(--main-green);
+      transform: rotate(90deg);
+    }
+    .modal-body {
+      display: flex;
+      flex-direction: column;
+      padding: 2.5rem;
+    }
+    @media (max-width: 768px) {
+      .modal-body {
+        padding: 1.5rem;
+      }
+    }
+    .modal-top {
+      display: flex;
+      gap: 2rem;
+      margin-bottom: 1.5rem;
+    }
+    @media (max-width: 600px) {
+      .modal-top {
+        flex-direction: column;
+      }
+    }
+    .modal-image {
+      flex: 1;
+      border-radius: 12px;
+      overflow: hidden;
+      max-height: 250px;
+    }
+    .modal-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .modal-header {
+      flex: 2;
+    }
+    .modal-title {
+      font-family: 'Playfair Display', serif;
+      color: var(--main-green);
+      font-size: 1.8rem;
+      margin-top: 0;
+      margin-bottom: 0.5rem;
+    }
+    .modal-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      margin: 1.2rem 0;
+    }
+    .modal-meta div {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .modal-meta i {
+      color: var(--main-green);
+      font-size: 1.1rem;
+    }
+    .modal-price {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--main-green-dark);
+      margin: 0.5rem 0;
+    }
+    .modal-desc {
+      color: var(--text-medium);
+      line-height: 1.7;
+      margin: 1.5rem 0;
+    }
+    .modal-benefits {
+      margin: 1.5rem 0;
+    }
+    .modal-benefits h4 {
+      color: var(--main-green);
+      margin-bottom: 0.8rem;
+      font-size: 1.2rem;
+    }
+    .modal-benefits ul {
+      padding-left: 1.2rem;
+      margin: 0;
+    }
+    .modal-benefits li {
+      margin-bottom: 0.5rem;
+      color: var(--text-medium);
+    }
+    .modal-actions {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .modal-btn {
+      padding: 12px 28px;
+      border-radius: 30px;
+      border: none;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .modal-btn.enroll {
+      background: var(--main-green);
+      color: white;
+      box-shadow: 0 4px 10px rgba(76, 175, 80, 0.3);
+    }
+    .modal-btn.enroll:hover {
+      background: var(--main-green-dark);
+      transform: translateY(-3px);
+    }
+    .modal-btn.info {
+      background: transparent;
+      color: var(--main-green);
+      border: 2px solid var(--main-green);
+    }
+    .modal-btn.info:hover {
+      background: rgba(76, 175, 80, 0.1);
+    }
+    
     footer {
       text-align: center;
-      color: #888;
+      color: var(--text-light);
       background: #f0f4f1;
       padding: 1.3rem 0;
       margin-top: 0;
       font-size: 1.07rem;
       letter-spacing: 0.04em;
+      border-top: 1px solid rgba(0,0,0,0.05);
+    }
+    .social-icons {
+      display: flex;
+      justify-content: center;
+      gap: 1.2rem;
+      margin-top: 0.8rem;
+    }
+    .social-icons a {
+      color: var(--main-green);
+      font-size: 1.4rem;
+      transition: var(--transition);
+    }
+    .social-icons a:hover {
+      color: var(--main-green-dark);
+      transform: translateY(-3px);
+    }
+    
+    /* Animation for header */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .courses-header {
+      animation: fadeIn 0.8s ease-out;
     }
   </style>
-  <script>
-    // Highlight sidebar nav
-    window.addEventListener('DOMContentLoaded', function() {
-      function updateActiveLink() {
-        const scrollPos = window.scrollY + 130;
-        document.querySelectorAll('.courses-side-nav a').forEach(link => {
-          const section = document.querySelector(link.hash);
-          if (!section) return;
-          if (scrollPos >= section.offsetTop && scrollPos < section.offsetTop + section.offsetHeight) {
-            link.classList.add('active');
-          } else {
-            link.classList.remove('active');
-          }
-        });
-      }
-      window.addEventListener('scroll', updateActiveLink);
-      updateActiveLink();
-    });
-  </script>
 </head>
 <body>
   <nav>
@@ -380,7 +655,7 @@
 
   <div class="courses-header">
     <h1>Our Yoga Courses</h1>
-    <p>Explore our wide range of yoga courses, thoughtfully designed for every level. Whether you are a complete beginner or a seasoned yogi, you’ll find a program suited to your goals and lifestyle. Click a section for details!</p>
+    <p>Explore our wide range of yoga courses, thoughtfully designed for every level. Whether you are a complete beginner or a seasoned yogi, you'll find a program suited to your goals and lifestyle. Click any course for details!</p>
   </div>
 
   <div class="courses-main-content">
@@ -402,47 +677,61 @@
           Perfect for newcomers! Build a strong foundation, learn essential poses, and start your yoga journey with confidence.
         </div>
         <div class="courses-list">
-          <div class="course-card">
+          <div class="course-card" data-title="Yoga Foundations" data-days="7" data-price="99" data-instructor="Jai Arudra" data-longdesc="This comprehensive beginner course covers all the essential yoga poses, breathing techniques, and mindfulness practices. You'll build a solid foundation for your yoga journey, learning proper alignment and safe practices. Perfect for those new to yoga or returning after a break.">
             <img src="https://images.unsplash.com/photo-1519864600265-abb23847ef2c?auto=format&fit=crop&w=400&q=80" alt="Yoga Basics">
             <h3>Yoga Foundations</h3>
             <div class="days">7 days</div>
             <div class="desc">Learn core postures, breathing, and basic mindfulness. No experience needed!</div>
+            <div class="instructor">Instructor: Jai Arudra</div>
+            <div class="price">$99</div>
           </div>
-          <div class="course-card">
+          <div class="course-card" data-title="Gentle Yoga Flow" data-days="10" data-price="129" data-instructor="Jai Arudra" data-longdesc="A calming and accessible yoga practice designed for all ages and fitness levels. This gentle flow focuses on joint mobility, stress reduction, and mindful movement. You'll leave each session feeling relaxed, refreshed, and more connected to your body.">
             <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80" alt="Gentle Yoga">
             <h3>Gentle Yoga Flow</h3>
             <div class="days">10 days</div>
             <div class="desc">A slow, accessible class for all ages, focusing on joint mobility and stress relief.</div>
+            <div class="instructor">Instructor: Jai Arudra</div>
+            <div class="price">$129</div>
           </div>
-          <div class="course-card">
+          <div class="course-card" data-title="Flexibility Starter" data-days="8" data-price="109" data-instructor="Jai Arudra" data-longdesc="Improve your flexibility safely and effectively with this beginner-friendly program. Learn proper stretching techniques and targeted sequences to increase your range of motion. Perfect for those who feel tight or want to enhance their physical performance.">
             <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=400&q=80" alt="Flexibility">
             <h3>Flexibility Starter</h3>
             <div class="days">8 days</div>
             <div class="desc">Safely improve flexibility and range of motion with beginner-level stretches.</div>
+            <div class="instructor">Instructor: Jai Arudra</div>
+            <div class="price">$109</div>
           </div>
-          <div class="course-card">
+          <div class="course-card" data-title="Balance & Posture" data-days="7" data-price="89" data-instructor="Jai Arudra" data-longdesc="Develop better balance and posture through targeted yoga practices. This course focuses on alignment, core strength, and body awareness to help you stand taller and move with more confidence in your daily life.">
             <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=400&q=80" alt="Balance Basics">
             <h3>Balance & Posture</h3>
             <div class="days">7 days</div>
             <div class="desc">Master basic balance poses and improve everyday posture.</div>
+            <div class="instructor">Instructor: Jai Arudra</div>
+            <div class="price">$89</div>
           </div>
-          <div class="course-card">
+          <div class="course-card" data-title="Breathwork & Relaxation" data-days="5" data-price="79" data-instructor="Jai Arudra" data-longdesc="Discover the transformative power of breath with this introductory course to pranayama (yogic breathing). Learn techniques to reduce stress, increase energy, and cultivate mindfulness. Perfect for those seeking calm in a busy world.">
             <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=400&q=80" alt="Breathwork">
             <h3>Breathwork & Relaxation</h3>
             <div class="days">5 days</div>
             <div class="desc">Simple breathing exercises and guided relaxation for stress reduction.</div>
+            <div class="instructor">Instructor: Jai Arudra</div>
+            <div class="price">$79</div>
           </div>
-          <div class="course-card">
+          <div class="course-card" data-title="Morning Yoga Energizer" data-days="6" data-price="99" data-instructor="Jai Arudra" data-longdesc="Start your day with energy and intention! This morning-focused yoga practice combines gentle movement with energizing sequences to awaken your body and mind. Leave each session feeling refreshed and ready for your day.">
             <img src="https://images.unsplash.com/photo-1504196606672-aef5c9cefc92?auto=format&fit=crop&w=400&q=80" alt="Morning Yoga">
             <h3>Morning Yoga Energizer</h3>
             <div class="days">6 days</div>
             <div class="desc">Start your day with gentle movement and energy boosting poses.</div>
+            <div class="instructor">Instructor: Jai Arudra</div>
+            <div class="price">$99</div>
           </div>
-          <div class="course-card">
+          <div class="course-card" data-title="Mindful Movement" data-days="9" data-price="119" data-instructor="Jai Arudra" data-longdesc="Learn to connect your breath with movement in this mindful yoga practice. This course emphasizes present-moment awareness, helping you cultivate focus and reduce mental chatter. Perfect for those seeking both physical and mental benefits.">
             <img src="https://images.unsplash.com/photo-1503437313881-503a91226419?auto=format&fit=crop&w=400&q=80" alt="Mindful Movement">
             <h3>Mindful Movement</h3>
             <div class="days">9 days</div>
             <div class="desc">Learn to connect breath and movement for a calm, mindful practice.</div>
+            <div class="instructor">Instructor: Jai Arudra</div>
+            <div class="price">$119</div>
           </div>
         </div>
       </section>
@@ -453,53 +742,69 @@
           For those with some experience. Deepen your practice, learn new poses, and explore more dynamic flows.
         </div>
         <div class="courses-list">
-          <div class="course-card">
+          <div class="course-card" data-title="Vinyasa Flow" data-days="14" data-price="149" data-instructor="Jai Arudra" data-longdesc="Experience the dynamic flow of Vinyasa yoga, linking breath with movement in creative sequences. Build strength, flexibility, and endurance while exploring more challenging transitions. Perfect for those ready to take their practice to the next level.">
             <img src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=400&q=80" alt="Vinyasa Yoga">
             <h3>Vinyasa Flow</h3>
             <div class="days">14 days</div>
             <div class="desc">Dynamic sequences linking breath with movement. Builds strength and balance.</div>
+            <div class="instructor">Instructor: Jai Arudra</div>
+            <div class="price">$149</div>
           </div>
-          <div class="course-card">
+          <div class="course-card" data-title="Hip Opener Series" data-days="7" data-price="109" data-instructor="Jai Arudra" data-longdesc="Target your hips with this focused intermediate series. Learn safe, progressive postures to increase mobility and release tension in the hip complex. Essential for those who sit for long periods or want to deepen their yoga poses.">
             <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=400&q=80" alt="Hip Openers">
             <h3>Hip Opener Series</h3>
             <div class="days">7 days</div>
             <div class="desc">Develop flexibility and mobility in hips through safe, progressive postures.</div>
+            <div class="instructor">Instructor: Jai Arudra</div>
+            <div class="price">$109</div>
           </div>
-          <div class="course-card">
+          <div class="course-card" data-title="Core Strength Builder" data-days="10" data-price="129" data-instructor="Jai Arudra" data-longdesc="Build a strong, stable core with targeted yoga sequences. This course focuses on functional core strength that supports your entire practice and daily movements. Includes challenging holds and flows to build endurance.">
             <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=400&q=80" alt="Core Strength">
             <h3>Core Strength Builder</h3>
             <div class="days">10 days</div>
             <div class="desc">Challenge your core muscles with targeted yoga flows and holds.</div>
+            <div class="instructor">Instructor: Jai Arudra</div>
+            <div class="price">$129</div>
           </div>
-          <div class="course-card">
+          <div class="course-card" data-title="Backbend Progression" data-days="8" data-price="119" data-instructor="Jai Arudra" data-longdesc="Safely progress to deeper backbends with expert guidance. Learn proper alignment, preparatory poses, and techniques to open your spine and shoulders. Transform your practice with improved flexibility and confidence.">
             <img src="https://images.unsplash.com/photo-1524594154908-edd0a5b9c5bc?auto=format&fit=crop&w=400&q=80" alt="Backbends">
             <h3>Backbend Progression</h3>
             <div class="days">8 days</div>
             <div class="desc">Safely work towards more advanced backbends and heart openers.</div>
+            <div class="instructor">Instructor: Jai Arudra</div>
+            <div class="price">$119</div>
           </div>
-          <div class="course-card">
+          <div class="course-card" data-title="Detox Twists" data-days="7" data-price="99" data-instructor="Jai Arudra" data-longdesc="Energize and cleanse with twisting yoga postures. This course focuses on spinal health, digestion, and detoxification through deep twisting sequences. Learn to safely deepen your twists for maximum benefit.">
             <img src="https://images.unsplash.com/photo-1503437313881-503a91226419?auto=format&fit=crop&w=400&q=80" alt="Twists">
             <h3>Detox Twists</h3>
             <div class="days">7 days</div>
             <div class="desc">Improve spinal health and digestion with energizing twisting poses.</div>
+            <div class="instructor">Instructor: Jai Arudra</div>
+            <div class="price">$99</div>
           </div>
-          <div class="course-card">
+          <div class="course-card" data-title="Strength Flow" data-days="8" data-price="119" data-instructor="Jai Arudra" data-longdesc="Build total body strength through challenging yoga flows. This intermediate course focuses on building muscular endurance while maintaining the fluidity of yoga. Perfect for those wanting to combine strength training with yoga.">
             <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=400&q=80" alt="Strength Flow">
             <h3>Strength Flow</h3>
             <div class="days">8 days</div>
             <div class="desc">Build total body strength with intermediate-level flows.</div>
+            <div class="instructor">Instructor: Jai Arudra</div>
+            <div class="price">$119</div>
           </div>
-          <div class="course-card">
+          <div class="course-card" data-title="Pranayama & Meditation" data-days="6" data-price="89" data-instructor="Jai Arudra" data-longdesc="Deepen your breathing practice and meditation techniques. Learn intermediate pranayama methods to enhance energy, focus, and relaxation. Includes guided meditations to cultivate mindfulness and inner peace.">
             <img src="https://images.unsplash.com/photo-1504196606672-aef5c9cefc92?auto=format&fit=crop&w=400&q=80" alt="Pranayama">
             <h3>Pranayama & Meditation</h3>
             <div class="days">6 days</div>
             <div class="desc">Breathing, focus, and simple meditation for deeper relaxation.</div>
+            <div class="instructor">Instructor: Jai Arudra</div>
+            <div class="price">$89</div>
           </div>
-          <div class="course-card">
+          <div class="course-card" data-title="Yin Yoga Deep Release" data-days="9" data-price="129" data-instructor="Jai Arudra" data-longdesc="Experience deep release with long-held Yin poses. This practice targets connective tissues, improves flexibility, and cultivates mindfulness. Perfect complement to more active yoga styles and for stress reduction.">
             <img src="https://images.unsplash.com/photo-1519864600265-abb23847ef2c?auto=format&fit=crop&w=400&q=80" alt="Yin Yoga">
             <h3>Yin Yoga Deep Release</h3>
             <div class="days">9 days</div>
             <div class="desc">Longer holds to target deep connective tissues for flexibility and calm.</div>
+            <div class="instructor">Instructor: Jai Arudra</div>
+            <div class="price">$129</div>
           </div>
         </div>
       </section>
@@ -510,55 +815,197 @@
           For advanced practitioners. Master challenging asanas, refine your technique, and expand your mind-body connection.
         </div>
         <div class="courses-list">
-          <div class="course-card">
+          <div class="course-card" data-title="Arm Balance Mastery" data-days="12" data-price="179" data-instructor="Jai Arudra" data-longdesc="Master challenging arm balances with proper technique and progressive training. This course breaks down complex poses into achievable steps, focusing on alignment, engagement, and mental focus. Transform your practice with gravity-defying poses.">
             <img src="https://images.unsplash.com/photo-1465101178521-c1a9136a121b?auto=format&fit=crop&w=400&q=80" alt="Arm Balances">
             <h3>Arm Balance Mastery</h3>
             <div class="days">12 days</div>
             <div class="desc">Progressively learn crow, side crow, and other arm balances safely.</div>
+            <div class="instructor">Instructor: Jai Arudra</div>
+            <div class="price">$179</div>
           </div>
-          <div class="course-card">
+          <div class="course-card" data-title="Inversions Intensive" data-days="14" data-price="199" data-instructor="Jai Arudra" data-longdesc="Build confidence in inversions with this comprehensive training. Learn proper alignment, strengthening exercises, and safe progressions for handstands, headstands, and shoulder stands. Overcome fear and build strength upside down.">
             <img src="https://images.unsplash.com/photo-1524594154908-edd0a5b9c5bc?auto=format&fit=crop&w=400&q=80" alt="Inversions">
             <h3>Inversions Intensive</h3>
             <div class="days">14 days</div>
             <div class="desc">Handstands, headstands, shoulder stands — learn the mechanics and build confidence.</div>
+            <div class="instructor">Instructor: Jai Arudra</div>
+            <div class="price">$199</div>
           </div>
-          <div class="course-card">
+          <div class="course-card" data-title="Advanced Vinyasa Flow" data-days="10" data-price="169" data-instructor="Jai Arudra" data-longdesc="Challenge yourself with creative, dynamic flows designed for advanced practitioners. This course features complex transitions, deeper expressions of poses, and opportunities to explore your edge in a supportive environment.">
             <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80" alt="Advanced Vinyasa">
             <h3>Advanced Vinyasa Flow</h3>
             <div class="days">10 days</div>
             <div class="desc">Intense, creative flows to challenge your strength and flexibility.</div>
+            <div class="instructor">Instructor: Jai Arudra</div>
+            <div class="price">$169</div>
           </div>
-          <div class="course-card">
+          <div class="course-card" data-title="Lotus Series" data-days="7" data-price="139" data-instructor="Jai Arudra" data-longdesc="Achieve the full lotus pose safely and sustainably. This course systematically addresses hip mobility and knee safety to prepare your body for advanced seated postures. Includes modifications for different body types.">
             <img src="https://images.unsplash.com/photo-1504196606672-aef5c9cefc92?auto=format&fit=crop&w=400&q=80" alt="Lotus Series">
             <h3>Lotus Series</h3>
             <div class="days">7 days</div>
             <div class="desc">Work towards full lotus and advanced hip openers with safe progressions.</div>
+            <div class="instructor">Instructor: Jai Arudra</div>
+            <div class="price">$139</div>
           </div>
-          <div class="course-card">
+          <div class="course-card" data-title="Ultimate Backbends" data-days="8" data-price="149" data-instructor="Jai Arudra" data-longdesc="Deepen your backbending practice with advanced asanas and alignment techniques. Explore challenging poses like wheel, camel, and scorpion variations with proper preparation and safety considerations.">
             <img src="https://images.unsplash.com/photo-1519864600265-abb23847ef2c?auto=format&fit=crop&w=400&q=80" alt="Backbends">
             <h3>Ultimate Backbends</h3>
             <div class="days">8 days</div>
             <div class="desc">Deepen your backbend practice with advanced asanas and alignment tips.</div>
+            <div class="instructor">Instructor: Jai Arudra</div>
+            <div class="price">$149</div>
           </div>
-          <div class="course-card">
+          <div class="course-card" data-title="Strength & Flexibility" data-days="10" data-price="179" data-instructor="Jai Arudra" data-longdesc="Combine strength and flexibility in this advanced training. Push your boundaries with challenging sequences that require both power and openness. Develop the balance needed for advanced yoga practice.">
             <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=400&q=80" alt="Strength & Flexibility">
             <h3>Strength & Flexibility</h3>
             <div class="days">10 days</div>
             <div class="desc">Push your limits with advanced flows targeting both strength and flexibility.</div>
+            <div class="instructor">Instructor: Jai Arudra</div>
+            <div class="price">$179</div>
           </div>
-          <div class="course-card">
+          <div class="course-card" data-title="Advanced Pranayama & Meditation" data-days="7" data-price="129" data-instructor="Jai Arudra" data-longdesc="Master advanced breathing techniques and meditation practices for transformation. This course explores subtle energy work, advanced pranayama, and deep meditative states to expand consciousness and inner awareness.">
             <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=400&q=80" alt="Pranayama + Meditation">
             <h3>Advanced Pranayama & Meditation</h3>
             <div class="days">7 days</div>
             <div class="desc">Master breathing techniques and meditation for transformation.</div>
+            <div class="instructor">Instructor: Jai Arudra</div>
+            <div class="price">$129</div>
           </div>
         </div>
       </section>
     </main>
   </div>
+  
+  <!-- Modal -->
+  <div class="modal" id="courseModal">
+    <div class="modal-content">
+      <button class="modal-close">&times;</button>
+      <div class="modal-body">
+        <div class="modal-top">
+          <div class="modal-image">
+            <img id="modalImg" src="" alt="Course Image">
+          </div>
+          <div class="modal-header">
+            <h2 class="modal-title" id="modalTitle"></h2>
+            <div class="modal-price" id="modalPrice"></div>
+            <div class="modal-meta">
+              <div><i class="fas fa-calendar-alt"></i> <span id="modalDays"></span></div>
+              <div><i class="fas fa-user"></i> <span id="modalInstructor"></span></div>
+              <div><i class="fas fa-chart-line"></i> <span id="modalLevel"></span></div>
+            </div>
+          </div>
+        </div>
+        <p class="modal-desc" id="modalDesc"></p>
+        <div class="modal-benefits">
+          <h4>What You'll Learn:</h4>
+          <ul>
+            <li>Detailed instruction on specific asanas and techniques</li>
+            <li>Proper alignment and injury prevention</li>
+            <li>Breathwork to enhance your practice</li>
+            <li>Sequencing strategies for home practice</li>
+            <li>Mindfulness and meditation techniques</li>
+          </ul>
+        </div>
+        <div class="modal-actions">
+          <button class="modal-btn enroll"><i class="fas fa-lock"></i> Enroll Now</button>
+          <button class="modal-btn info"><i class="fas fa-info-circle"></i> More Information</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <footer>
     <p>&copy; 2025 Prince of Host Yoga Academy. All rights reserved.</p>
+    <div class="social-icons">
+      <a href="#"><i class="fab fa-facebook"></i></a>
+      <a href="#"><i class="fab fa-instagram"></i></a>
+      <a href="#"><i class="fab fa-youtube"></i></a>
+      <a href="#"><i class="fab fa-twitter"></i></a>
+    </div>
   </footer>
+
+  <script>
+    // Highlight sidebar nav
+    window.addEventListener('DOMContentLoaded', function() {
+      function updateActiveLink() {
+        const scrollPos = window.scrollY + 130;
+        document.querySelectorAll('.courses-side-nav a').forEach(link => {
+          const section = document.querySelector(link.hash);
+          if (!section) return;
+          if (scrollPos >= section.offsetTop && scrollPos < section.offsetTop + section.offsetHeight) {
+            link.classList.add('active');
+          } else {
+            link.classList.remove('active');
+          }
+        });
+      }
+      window.addEventListener('scroll', updateActiveLink);
+      updateActiveLink();
+      
+      // Modal functionality
+      const modal = document.getElementById('courseModal');
+      const closeBtn = document.querySelector('.modal-close');
+      const courseCards = document.querySelectorAll('.course-card');
+      
+      // Open modal when course card is clicked
+      courseCards.forEach(card => {
+        card.addEventListener('click', function() {
+          const title = this.querySelector('h3').textContent;
+          const imgSrc = this.querySelector('img').src;
+          const days = this.querySelector('.days').textContent;
+          const instructor = this.dataset.instructor;
+          const price = this.querySelector('.price').textContent;
+          const longDesc = this.dataset.longdesc;
+          
+          // Get the level based on the section
+          let level = "Beginner";
+          if (this.closest('#intermediate')) level = "Intermediate";
+          if (this.closest('#advanced')) level = "Advanced";
+          
+          // Populate modal
+          document.getElementById('modalTitle').textContent = title;
+          document.getElementById('modalImg').src = imgSrc;
+          document.getElementById('modalDays').textContent = days;
+          document.getElementById('modalInstructor').textContent = instructor;
+          document.getElementById('modalPrice').textContent = price;
+          document.getElementById('modalLevel').textContent = level;
+          document.getElementById('modalDesc').textContent = longDesc;
+          
+          // Show modal
+          modal.classList.add('active');
+          document.body.style.overflow = 'hidden';
+        });
+      });
+      
+      // Close modal
+      function closeModal() {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+      
+      closeBtn.addEventListener('click', closeModal);
+      
+      // Close modal when clicking outside content
+      modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+          closeModal();
+        }
+      });
+      
+      // Close with ESC key
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && modal.classList.contains('active')) {
+          closeModal();
+        }
+      });
+      
+      // Enroll button action
+      document.querySelector('.modal-btn.enroll').addEventListener('click', function() {
+        const courseTitle = document.getElementById('modalTitle').textContent;
+        alert(`Thank you for your interest in "${courseTitle}"! You are being redirected to the enrollment page.`);
+        closeModal();
+      });
+    });
+  </script>
 </body>
 </html>
