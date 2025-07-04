@@ -44,6 +44,7 @@
     }
     .nav-container {
       display: flex;
+      flex-wrap: wrap;
       justify-content: space-between;
       align-items: center;
       max-width: 1100px;
@@ -61,18 +62,35 @@
       font-size: 1rem;
       color: #777;
     }
+    .nav-center {
+      display: flex;
+      flex: 1;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      min-width: 260px;
+      gap: 0.3rem;
+    }
     .nav-center a {
       margin: 0 1.2rem;
       text-decoration: none;
       font-weight: 500;
       color: #333;
       transition: color 0.2s;
+      font-size: 1.03rem;
+      white-space: nowrap;
     }
     .nav-center a:hover {
       color: var(--main-green);
     }
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      min-width: 180px;
+      justify-content: flex-end;
+    }
     .nav-right button {
-      margin-left: 0.5rem;
       padding: 10px 28px;
       border-radius: 24px;
       border: none;
@@ -81,9 +99,43 @@
       font-size: 1rem;
       cursor: pointer;
       transition: background 0.2s;
+      margin-left: 0.2rem;
+      margin-right: 0.2rem;
+      white-space: nowrap;
     }
     .nav-right button:hover {
       background: #388e3c;
+    }
+    @media (max-width: 900px) {
+      .nav-container {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+        padding: 0.7rem 0.5rem;
+      }
+      .nav-center {
+        justify-content: flex-start;
+        gap: 0.2rem;
+        margin: 0.4rem 0;
+      }
+      .nav-right {
+        justify-content: flex-start;
+        gap: 0.4rem;
+        margin-bottom: 0.5rem;
+      }
+    }
+    @media (max-width: 700px) {
+      .nav-container {
+        padding: 0.7rem 0.2rem;
+      }
+      .nav-center a {
+        margin: 0 0.5rem;
+        font-size: 0.97rem;
+      }
+      .nav-right button {
+        padding: 8px 14px;
+        font-size: 0.93rem;
+      }
     }
 
     .hero {
@@ -156,7 +208,7 @@
       opacity: 0;
       transform: translateY(40px);
       transition: opacity 0.6s, transform 0.6s;
-      scroll-margin-top: 110px; /* Makes anchor links land with whole section visible */
+      scroll-margin-top: 110px;
     }
     .section.visible { opacity: 1; transform: translateY(0);}
     h2 {
@@ -257,36 +309,41 @@
       display: flex;
       transition: transform 0.6s cubic-bezier(.77,0,.18,1);
       will-change: transform;
+      justify-content: center;
+      align-items: center;
     }
     .testimonial {
       background: #fff;
       border-radius: 16px;
       box-shadow: 0 2px 12px #607d8b15;
       padding: 2rem 1.5rem;
-      max-width: 340px;
+      max-width: 400px;
       min-width: 280px;
       margin: 0 0.5rem;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
+      justify-content: center;
+      align-items: center;
       transition: transform .15s, box-shadow .15s;
       flex-shrink: 0;
+      text-align: center;
     }
     .testimonial:hover {
       transform: scale(1.04) rotate(-2deg);
       box-shadow: 0 8px 32px #1976d220;
     }
     .testimonial-quote {
-      font-size: 1.08rem;
+      font-size: 1.15rem;
       color: #444;
       font-style: italic;
       margin-bottom: 1.3rem;
+      text-align: center;
     }
     .testimonial-name {
       font-weight: bold;
       color: #1976d2;
-      text-align: right;
-      font-size: 1.02rem;
+      text-align: center;
+      font-size: 1.08rem;
     }
     .testimonials-slider-arrow {
       position: absolute;
@@ -504,13 +561,11 @@
         const track = document.querySelector('.testimonials-slider-track');
         if (!track) return;
         track.innerHTML = '';
-        // Show one testimonial at a time (looks best for mobile+desktop, but you can show more if you want)
         const t = testimonials[current];
         const tmpl = document.createElement('div');
         tmpl.className = 'testimonial';
         tmpl.innerHTML = `<div class="testimonial-quote">“${t.quote}”</div><div class="testimonial-name">${t.name}</div>`;
         track.appendChild(tmpl);
-        // update dots
         document.querySelectorAll('.testimonials-slider-dot').forEach((dot, i) => {
           dot.classList.toggle('active', i === current);
         });
@@ -531,10 +586,7 @@
         clearInterval(autoSlideTimer);
         autoSlideTimer = setInterval(nextTestimonial, 6000);
       }
-
-      // Setup slider when DOM ready
       setTimeout(() => {
-        // Dots
         const dots = document.querySelector('.testimonials-slider-dots');
         if (dots) {
           dots.innerHTML = '';
@@ -545,7 +597,6 @@
             dots.appendChild(dot);
           }
         }
-        // Arrows
         document.querySelector('.testimonials-slider-arrow.left')
           .addEventListener('click', ()=>{ prevTestimonial(); startAutoSlide(); });
         document.querySelector('.testimonials-slider-arrow.right')
