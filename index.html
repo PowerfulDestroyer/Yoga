@@ -44,6 +44,10 @@
       text-transform: uppercase;
       letter-spacing: 0.5px;
       font-size: 0.95rem;
+      transition: color 0.2s;
+    }
+    nav .nav-center a:hover {
+      color: #ffd700;
     }
     nav .nav-right {
       text-align: right;
@@ -57,6 +61,11 @@
       margin-left: 10px;
       font-weight: bold;
       cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+    }
+    nav .nav-right button:hover {
+      background-color: #e0f7ea;
+      color: #1a5d3e;
     }
     nav h1 {
       color: white;
@@ -86,6 +95,9 @@
       margin: 1rem auto 3rem auto;
       text-shadow: 1px 1px 3px rgba(0,0,0,0.4);
     }
+    .hero .main-button {
+      margin-top: 2rem;
+    }
     .section {
       padding: 3rem 1rem;
       max-width: 1000px;
@@ -105,26 +117,42 @@
       margin-bottom: 1rem;
       text-align: center;
     }
+    .section-content {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      text-align: left;
+    }
+    /* For sections that need column layout and centered text */
+    #courses .section-content,
+    #gallery .section-content,
+    #contact .section-content {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
     .section p {
       font-size: 1.1rem;
       line-height: 1.8;
       color: #555;
       background: none;
       padding: 0 1rem;
-    }
-    .about-content {
-      display: flex;
-      align-items: center;
-      gap: 2rem;
-      flex-wrap: wrap;
-      justify-content: center;
+      margin-bottom: 0;
     }
     .about-content img {
       max-width: 300px;
       border-radius: 15px;
       box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     }
-    button {
+    .section img.icon {
+      width: 80px;
+      height: 80px;
+      margin-bottom: 1rem;
+      opacity: 0.85;
+    }
+    button, .main-button {
       background-color: #4CAF50;
       color: white;
       border-radius: 25px;
@@ -135,14 +163,15 @@
       font-family: 'Poppins', sans-serif;
       font-weight: bold;
       font-size: 1rem;
+      margin-top: 2rem;
     }
-    button:hover {
+    button:hover, .main-button:hover {
       background-color: #45a049;
       transform: scale(1.05);
     }
     .courses-button {
-      margin-top: 3rem;
-      margin-left: 2rem;
+      margin: 2rem auto 0 auto;
+      display: block;
     }
     footer {
       background-color: #333;
@@ -151,9 +180,27 @@
       padding: 1rem;
       margin-top: 2rem;
     }
+    @media (max-width: 800px) {
+      .section-content, .about-content {
+        flex-direction: column;
+        text-align: center;
+      }
+      nav .nav-container {
+        flex-direction: column;
+        gap: 1rem;
+      }
+    }
   </style>
   <script>
     window.addEventListener('scroll', () => {
+      document.querySelectorAll('.section').forEach(section => {
+        const rect = section.getBoundingClientRect();
+        if (rect.top < window.innerHeight - 50) {
+          section.classList.add('visible');
+        }
+      });
+    });
+    window.addEventListener('DOMContentLoaded', () => {
       document.querySelectorAll('.section').forEach(section => {
         const rect = section.getBoundingClientRect();
         if (rect.top < window.innerHeight - 50) {
@@ -186,36 +233,53 @@
 
   <section class="hero" id="home">
     <h1>Awaken Your Mind. Transform Your Body.</h1>
-    <p>Join classes led by the Guinness World Record Holder for the Longest Tree Pose (4 Hours Non-Stop)</p>
-    <button onclick="window.location.href='#courses'">Explore Our Courses</button>
+    <p>Join classes led by the Guinness World Record Holder for the Longest Tree Pose (4 Hours Non-Stop).</p>
+    <button class="main-button" onclick="window.location.href='#courses'">Explore Our Courses</button>
   </section>
 
   <section class="section" id="about">
     <h2>About Me</h2>
-    <div class="about-content">
-      <p>I am Prince of Host, Guinness World Record Holder for maintaining the Tree Pose for 4 hours continuously. My journey began over a decade ago, driven by a passion for balance, wellness, and inner peace. Today, I share my experience and techniques through this academy to help students achieve physical fitness, mental clarity, and spiritual growth.</p>
+    <div class="section-content about-content">
       <img src="https://images.unsplash.com/photo-1590618681713-eb9de9f50190" alt="Vrikshasana Pose">
+      <p>
+        I am Prince of Host, a passionate yoga practitioner and Guinness World Record Holder for maintaining the Tree Pose (Vrikshasana) for 4 hours continuously. My journey in yoga began over a decade ago, driven by a quest for balance, holistic wellness, and the joy of teaching others. Through dedication, discipline, and the guidance of inspiring teachers, I have helped hundreds of students discover the transformative power of yoga. My mission is to make yoga accessible to everyone, regardless of age or experience, and to foster a supportive community focused on growth and well-being.
+      </p>
     </div>
   </section>
 
   <section class="section" id="courses">
     <h2>Our Courses</h2>
-    <p>We offer a variety of carefully designed yoga courses tailored to all levels of experience. Visit our dedicated Courses page to explore detailed programs for Beginner, Intermediate, and Advanced learners.</p>
-    <div class="courses-button" style="text-align: center; margin-top: 3rem;">
-      <button onclick="window.location.href='courses.html'">View All Courses</button>
+    <div class="section-content">
+      <img class="icon" src="https://img.icons8.com/ios-filled/100/4caf50/yoga.png" alt="Yoga Icon">
+      <p>
+        We offer a variety of thoughtfully designed yoga courses for all levels—Beginner, Intermediate, and Advanced. Each program is structured to help you progress safely, improve strength and flexibility, and deepen your understanding of yoga philosophy and practice. Our certified instructors are dedicated to creating an inclusive and supportive environment for every student.
+      </p>
+      <button class="courses-button" onclick="window.location.href='courses.html'">View All Courses</button>
     </div>
   </section>
 
   <section class="section" id="gallery">
     <h2>Gallery</h2>
-    <p>Photos coming soon...</p>
+    <div class="section-content">
+      <img class="icon" src="https://img.icons8.com/ios-filled/100/4caf50/image-gallery.png" alt="Gallery Icon">
+      <p>
+        Explore our photo gallery to see highlights from our classes, workshops, and community events. New photos are added regularly to showcase our journey and the progress of our students.<br>
+        <em>Photos coming soon...</em>
+      </p>
+    </div>
   </section>
 
   <section class="section" id="contact">
     <h2>Contact Me</h2>
-    <p>Email: info@yogaacademy.com</p>
-    <p>Phone: +91 12345 67890</p>
-    <p>Location: Yoga Street, Chennai, India</p>
+    <div class="section-content">
+      <img class="icon" src="https://img.icons8.com/ios-filled/100/4caf50/contacts.png" alt="Contact Icon">
+      <p>
+        <strong>Email:</strong> info@yogaacademy.com<br>
+        <strong>Phone:</strong> +91 12345 67890<br>
+        <strong>Location:</strong> Yoga Street, Chennai, India
+      </p>
+      <button onclick="window.location.href='mailto:info@yogaacademy.com'">Send an Email</button>
+    </div>
   </section>
 
   <footer>
