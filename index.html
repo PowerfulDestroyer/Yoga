@@ -6,11 +6,182 @@
   <title>Prince of Host Yoga Academy - Guinness World Record Holder</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins&display=swap" rel="stylesheet">
   <style>
-    /* (Styles remain the same as your current file for consistency and professionalism) */
-    /* ...[keep your entire CSS here as is]... */
+    body {
+      font-family: 'Poppins', Arial, sans-serif;
+      margin: 0;
+      background: #f7f9fa;
+      color: #333;
+    }
+    nav {
+      background: #fff;
+      box-shadow: 0 2px 8px rgba(60,60,60,0.04);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0.7rem 1.5rem;
+    }
+    .nav-left h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.7rem;
+      color: #4caf50;
+      margin: 0 0 0.2rem 0;
+    }
+    .nav-left p {
+      margin: 0;
+      font-size: 1rem;
+      color: #777;
+    }
+    .nav-center a {
+      margin: 0 1.2rem;
+      text-decoration: none;
+      font-weight: 500;
+      color: #333;
+      transition: color 0.2s;
+    }
+    .nav-center a:hover {
+      color: #4caf50;
+    }
+    .nav-right button {
+      margin-left: 0.5rem;
+      padding: 7px 20px;
+      border-radius: 20px;
+      border: none;
+      background: #4caf50;
+      color: white;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .nav-right button:hover {
+      background: #388e3c;
+    }
+    /* Hero section */
+    .hero {
+      background: linear-gradient(120deg, #e8f5e9 0%, #fff 100%);
+      text-align: center;
+      padding: 4rem 1rem 3rem 1rem;
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      color: #4caf50;
+      font-size: 2.4rem;
+      margin-bottom: 1rem;
+    }
+    .hero p {
+      font-size: 1.17rem;
+      color: #555;
+      margin-bottom: 2.2rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .main-button {
+      padding: 15px 36px;
+      font-size: 1.1rem;
+      border-radius: 30px;
+      background-color: #4caf50;
+      color: white;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(60, 180, 80, 0.09);
+      transition: background 0.25s, transform 0.18s;
+    }
+    .main-button:hover {
+      background: #388e3c;
+      transform: scale(1.04);
+    }
+    /* Section layout */
+    .section {
+      padding: 3rem 1rem;
+      max-width: 1000px;
+      margin: 2rem auto;
+      background: #fff;
+      border-radius: 14px;
+      box-shadow: 0 2px 8px rgba(60, 60, 60, 0.05);
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.6s, transform 0.6s;
+    }
+    .section.visible { opacity: 1; transform: translateY(0);}
+    h2 {
+      text-align: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      color: #4caf50;
+      margin-bottom: 1.1rem;
+    }
+    .section-content, .about-content {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .about-content img, .section-content .icon {
+      width: 120px;
+      height: 120px;
+      border-radius: 18px;
+      object-fit: cover;
+      box-shadow: 0 1px 8px rgba(60,60,60,0.08);
+      background: #f7f7f7;
+    }
+    .about-content p, .section-content p {
+      max-width: 520px;
+      font-size: 1.08rem;
+      color: #555;
+      margin: 0;
+      line-height: 1.7;
+      text-align: left;
+    }
+    .section-content {
+      flex-direction: row;
+    }
+    .courses-button, .section-content button {
+      text-align: center;
+      margin-top: 2rem;
+    }
+    .courses-button button, .section-content button {
+      padding: 12px 30px;
+      font-size: 1rem;
+      border-radius: 25px;
+      background-color: #4caf50;
+      color: white;
+      border: none;
+      cursor: pointer;
+      transition: background 0.25s, transform 0.18s;
+      box-shadow: 0 2px 8px rgba(76, 175, 80, 0.12);
+    }
+    .courses-button button:hover, .section-content button:hover {
+      background-color: #388e3c;
+      transform: scale(1.03);
+    }
+    /* Footer */
+    footer {
+      text-align: center;
+      color: #888;
+      background: #f0f4f1;
+      padding: 1.3rem 0;
+      margin-top: 3rem;
+      font-size: 1rem;
+      letter-spacing: 0.04em;
+    }
+    /* Responsive */
+    @media (max-width: 800px) {
+      .nav-container { flex-direction: column; gap: 0.6rem;}
+      .section-content, .about-content {flex-direction: column;}
+      .section { padding: 2rem 0.5rem;}
+      .about-content img, .section-content .icon { width:90px; height:90px;}
+    }
   </style>
   <script>
-    // (Your scroll animation script remains unchanged)
+    // Section reveal animation on scroll
     window.addEventListener('scroll', () => {
       document.querySelectorAll('.section').forEach(section => {
         const rect = section.getBoundingClientRect();
@@ -52,16 +223,21 @@
 
   <section class="hero" id="home">
     <h1>Awaken Your Mind. Transform Your Body.</h1>
-    <p>Join world-class yoga sessions led by the Guinness World Record Holder for the Longest Tree Pose (Vrikshasana) — 4 hours non-stop. Discover the true power of yoga for every body and every age.</p>
+    <p>
+      Join world-class yoga sessions led by the Guinness World Record Holder for the Longest Tree Pose (Vrikshasana) — 4 hours non-stop.
+      Discover the true power of yoga for every body and every mind, right here in Chennai.
+    </p>
     <button class="main-button" onclick="window.location.href='#courses'">Explore Our Courses</button>
   </section>
 
   <section class="section" id="about">
     <h2>About Me</h2>
-    <div class="section-content about-content">
+    <div class="about-content">
       <img src="https://images.unsplash.com/photo-1590618681713-eb9de9f50190" alt="Vrikshasana Pose">
       <p>
-        Hello! I am Prince of Host, a dedicated yoga practitioner and Guinness World Record Holder for holding the Tree Pose (Vrikshasana) for 4 hours non-stop. My journey in yoga began over a decade ago, and since then, I have helped hundreds of students find strength, balance, and peace through holistic yoga practice. Join me to experience authentic yoga in a supportive and inspiring community.
+        Hello! I am Prince of Host, a dedicated yoga practitioner and Guinness World Record Holder for holding the Tree Pose (Vrikshasana) for 4 hours non-stop.
+        My journey in yoga began over a decade ago, and my passion is to help others unlock their potential and discover holistic well-being.
+        Whether you are a beginner or an advanced yogi, you’ll find a welcoming space with us.
       </p>
     </div>
   </section>
@@ -71,9 +247,12 @@
     <div class="section-content">
       <img class="icon" src="https://img.icons8.com/ios-filled/100/4caf50/yoga.png" alt="Yoga Icon">
       <p>
-        We offer thoughtfully designed yoga courses for all levels: <strong>Beginner</strong>, <strong>Intermediate</strong>, and <strong>Advanced</strong>. Each program is structured to help you progress safely, build flexibility, and achieve your wellness goals.
+        We offer thoughtfully designed yoga courses for all levels: <strong>Beginner</strong>, <strong>Intermediate</strong>, and <strong>Advanced</strong>.
+        Each program is structured to help you build strength, flexibility, balance, and peace of mind.
       </p>
-      <button class="courses-button" onclick="window.location.href='courses.html'">View All Courses</button>
+    </div>
+    <div class="courses-button">
+      <button onclick="window.location.href='courses.html'">View All Courses</button>
     </div>
   </section>
 
