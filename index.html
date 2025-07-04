@@ -103,13 +103,24 @@
       font-size: 2rem;
       color: #4CAF50;
       margin-bottom: 1rem;
+      text-align: center;
     }
     .section p {
       font-size: 1.1rem;
       line-height: 1.8;
       color: #555;
-      background: #fff;
-      padding: 1.5rem;
+      background: none;
+      padding: 0 1rem;
+    }
+    .about-content {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .about-content img {
+      max-width: 300px;
       border-radius: 15px;
       box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     }
@@ -128,6 +139,10 @@
     button:hover {
       background-color: #45a049;
       transform: scale(1.05);
+    }
+    .courses-button {
+      margin-top: 3rem;
+      margin-left: 2rem;
     }
     footer {
       background-color: #333;
@@ -177,13 +192,18 @@
 
   <section class="section" id="about">
     <h2>About Me</h2>
-    <p>I am Prince of Host, Guinness World Record Holder for maintaining the Tree Pose for 4 hours continuously. My journey began over a decade ago, driven by a passion for balance, wellness, and inner peace. Today, I share my experience and techniques through this academy to help students achieve physical fitness, mental clarity, and spiritual growth.</p>
+    <div class="about-content">
+      <p>I am Prince of Host, Guinness World Record Holder for maintaining the Tree Pose for 4 hours continuously. My journey began over a decade ago, driven by a passion for balance, wellness, and inner peace. Today, I share my experience and techniques through this academy to help students achieve physical fitness, mental clarity, and spiritual growth.</p>
+      <img src="https://images.unsplash.com/photo-1590618681713-eb9de9f50190" alt="Vrikshasana Pose">
+    </div>
   </section>
 
   <section class="section" id="courses">
     <h2>Our Courses</h2>
     <p>We offer a variety of carefully designed yoga courses tailored to all levels of experience. Visit our dedicated Courses page to explore detailed programs for Beginner, Intermediate, and Advanced learners.</p>
-    <button onclick="window.location.href='courses.html'">View All Courses</button>
+    <div class="courses-button">
+      <button onclick="window.location.href='courses.html'">View All Courses</button>
+    </div>
   </section>
 
   <section class="section" id="gallery">
