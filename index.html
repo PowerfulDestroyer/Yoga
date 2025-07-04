@@ -29,11 +29,17 @@
       line-height: 1.7;
     }
     nav {
-      background: #fff;
+      background: linear-gradient(90deg, #f8fafc 0%, #e8f5e9 100%);
+      border-bottom: 1px solid #eee;
+      min-height: 70px;
       box-shadow: 0 2px 8px rgba(60,60,60,0.04);
       position: sticky;
       top: 0;
       z-index: 10;
+      transition: min-height 0.25s;
+    }
+    @media (min-width: 900px) {
+      nav { min-height: 86px; }
     }
     .nav-container {
       display: flex;
@@ -79,27 +85,35 @@
       background: #388e3c;
     }
 
-    /* Hero section with background image overlay */
+    /* Hero section with background image overlay and subtitle */
     .hero {
-      background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
+      background: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.35)),
                   url('https://images.unsplash.com/photo-1551524551-44a0b6e8e7bc') 
                   no-repeat center center/cover;
       text-align: center;
-      padding: 5.5rem 1rem 5.5rem 1rem;
+      padding: 6rem 1rem 6rem 1rem;
     }
     .hero h1,
+    .hero .subtitle,
     .hero p {
       color: #fff;
       text-shadow: 0 2px 8px rgba(0,0,0,0.18);
     }
     .hero h1 {
       font-family: 'Playfair Display', serif;
-      font-size: 2.3rem;
-      margin-bottom: 1.1rem;
+      font-size: 2.4rem;
+      margin-bottom: 0.5rem;
+    }
+    .hero .subtitle {
+      font-size: 1.27rem;
+      color: #fce4ec;
+      margin: 0 auto 1.2rem auto;
+      font-weight: 500;
+      letter-spacing: 0.03em;
     }
     .hero p {
-      font-size: 1.22rem;
-      margin-bottom: 2.2rem;
+      font-size: 1.18rem;
+      margin-bottom: 2.1rem;
       max-width: 600px;
       margin-left: auto;
       margin-right: auto;
@@ -126,6 +140,12 @@
     .wave-separator {
       line-height: 0;
       margin: 0;
+      transition: filter 0.25s;
+    }
+    .wave-separator svg:hover path {
+      filter: brightness(1.16) drop-shadow(0 2px 8px #b2dfdb);
+      transition: filter 0.25s;
+      cursor: pointer;
     }
 
     /* Section layout */
@@ -163,6 +183,12 @@
       background: #fff;
       padding: 18px;
       margin-bottom: 1.2rem;
+      transition: transform 0.18s, box-shadow 0.18s;
+    }
+    .about-content svg.icon:hover,
+    .section-content svg.icon:hover {
+      transform: scale(1.08) rotate(-2deg);
+      box-shadow: 0 4px 20px rgba(60,60,60,0.12);
     }
     .about-content p, .section-content p {
       max-width: 520px;
@@ -197,6 +223,77 @@
     #courses { background: var(--courses-bg); }
     #gallery { background: var(--gallery-bg); }
     #contact { background: var(--contact-bg); }
+
+    /* Contact Socials */
+    .contact-socials {
+      margin-top: 1.5rem;
+      display: flex;
+      gap: 18px;
+      justify-content: center;
+    }
+    .contact-socials a svg {
+      width: 32px; height: 32px;
+      transition: transform 0.17s, filter 0.17s;
+      filter: grayscale(0.2) brightness(0.93);
+    }
+    .contact-socials a:hover svg {
+      transform: scale(1.2) rotate(-8deg);
+      filter: brightness(1.22);
+    }
+
+    /* Contact Form */
+    .contact-form {
+      margin: 2.5rem auto 0 auto;
+      max-width: 540px;
+      padding: 1.5rem 1.2rem 1.7rem 1.2rem;
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 2px 16px rgba(60,60,60,0.08);
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+    .contact-form .form-row {
+      display: flex;
+      gap: 1rem;
+    }
+    .contact-form input, .contact-form textarea {
+      width: 100%;
+      padding: 0.9rem;
+      font-size: 1.07rem;
+      border: 1px solid #e3e3e3;
+      border-radius: 8px;
+      background: #f8fafc;
+      font-family: inherit;
+      resize: none;
+      transition: border 0.18s;
+    }
+    .contact-form input:focus, .contact-form textarea:focus {
+      outline: none;
+      border: 1.5px solid #4caf50;
+      background: #fff;
+    }
+    .contact-form button[type="submit"] {
+      margin-top: 0.7rem;
+      background: var(--main-green);
+      color: #fff;
+      border: none;
+      border-radius: 24px;
+      padding: 0.9rem 0;
+      font-size: 1.12rem;
+      letter-spacing: 0.01em;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(76, 175, 80, 0.10);
+      transition: background 0.18s, transform 0.15s;
+    }
+    .contact-form button[type="submit"]:hover {
+      background: #388e3c;
+      transform: scale(1.04);
+    }
+    @media (max-width: 700px) {
+      .contact-form { padding: 1.1rem 0.4rem; }
+      .contact-form .form-row { flex-direction: column; gap: 0.8rem; }
+    }
 
     /* Footer */
     footer {
@@ -260,6 +357,9 @@
 
   <section class="hero" id="home">
     <h1>Awaken Your Mind. Transform Your Body.</h1>
+    <p class="subtitle">
+      With Prince of Host, Guinness World Record Holder in Vrikshasana
+    </p>
     <p>
       Join world-class yoga sessions led by the Guinness World Record Holder for the Longest Tree Pose (Vrikshasana) — 4 hours non-stop.
       Discover the true power of yoga for every body and every mind, right here in Chennai.
@@ -267,10 +367,7 @@
     <button class="main-button" onclick="window.location.href='#courses'">Explore Our Courses</button>
   </section>
 
-  <!-- Wave divider -->
-  <div class="wave-separator">
-    <svg viewBox="0 0 1440 80" xmlns="http://www.w3.org/2000/svg"><path fill="#fce4ec" d="M0,32L1440,80L1440,0L0,0Z"></path></svg>
-  </div>
+  <!-- FIRST wave divider REMOVED for clean transition -->
 
   <section class="section" id="about">
     <h2>About Me</h2>
@@ -334,6 +431,39 @@
         <strong>Phone:</strong> +91 12345 67890<br>
         <strong>Location:</strong> Yoga Street, Chennai, India
       </p>
+    </div>
+    <form class="contact-form" method="post" action="mailto:info@yogaacademy.com" enctype="text/plain">
+      <div class="form-row">
+        <input type="text" name="name" placeholder="Your Name" required>
+        <input type="email" name="email" placeholder="Your Email" required>
+      </div>
+      <textarea name="message" rows="4" placeholder="Your Message" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+    <div class="contact-socials">
+      <!-- Instagram -->
+      <a href="https://instagram.com/" target="_blank" aria-label="Instagram">
+        <svg viewBox="0 0 32 32" fill="none">
+          <rect width="32" height="32" rx="8" fill="#fff"/>
+          <path d="M16 11.2a4.8 4.8 0 1 0 0 9.6 4.8 4.8 0 0 0 0-9.6Zm0 7.9a3.1 3.1 0 1 1 0-6.2 3.1 3.1 0 0 1 0 6.2ZM21.5 10.7a1.1 1.1 0 1 1-2.2 0 1.1 1.1 0 0 1 2.2 0ZM24.1 12.4c-.2-1.2-.7-2.2-1.4-3-.8-.8-1.8-1.3-3-1.4-1.2-.2-4.8-.2-6 0-1.2.2-2.2.7-3 1.4-.8.8-1.3 1.8-1.4 3-.2 1.2-.2 4.8 0 6 .2 1.2.7 2.2 1.4 3 .8.8 1.8 1.3 3 1.4 1.2.2 4.8.2 6 0 1.2-.2 2.2-.7 3-1.4.8-.8 1.3-1.8 1.4-3 .2-1.2.2-4.8 0-6Zm-2 7.2a3.5 3.5 0 0 1-2 .5c-1.1.1-4.6.1-5.7 0a3.5 3.5 0 0 1-2-.5 3.5 3.5 0 0 1-1.3-1.3 3.5 3.5 0 0 1-.5-2c-.1-1.1-.1-4.6 0-5.7a3.5 3.5 0 0 1 .5-2c.3-.5.8-1 1.3-1.3a3.5 3.5 0 0 1 2-.5c1.1-.1 4.6-.1 5.7 0a3.5 3.5 0 0 1 2 .5c.5.3 1 .8 1.3 1.3.3.5.5 1.1.5 2 .1 1.1.1 4.6 0 5.7a3.5 3.5 0 0 1-.5 2c-.3.5-.8 1-1.3 1.3Z" fill="#d81b60"/>
+        </svg>
+      </a>
+      <!-- Facebook -->
+      <a href="https://facebook.com/" target="_blank" aria-label="Facebook">
+        <svg viewBox="0 0 32 32" fill="none">
+          <rect width="32" height="32" rx="8" fill="#fff"/>
+          <path d="M20.7 17.3l.4-2.7h-2.6v-1.8c0-.7.2-1.2 1.2-1.2h1.4V9.4A17.3 17.3 0 0 0 19 9.3c-2 0-3.2 1.2-3.2 3.3v2h-2v2.7h2v6.6h2.4v-6.6h2.1Z" fill="#1877f3"/>
+        </svg>
+      </a>
+      <!-- WhatsApp -->
+      <a href="https://wa.me/" target="_blank" aria-label="WhatsApp">
+        <svg viewBox="0 0 32 32" fill="none">
+          <rect width="32" height="32" rx="8" fill="#fff"/>
+          <path d="M16 8.4a7.6 7.6 0 0 0-6.6 11.4l-1 3.6 3.7-1a7.6 7.6 0 1 0 3.9-14Zm0 13.8a6.3 6.3 0 0 1-3.2-.9l-.2-.1-2.2.6.6-2.1-.1-.2a6.3 6.3 0 1 1 5.1 2.7Zm3.4-4.5c-.2-.1-1.2-.6-1.4-.7-.2-.1-.4-.1-.6.1-.2.2-.7.7-.8.9-.1.2-.3.2-.5.1-.2-.1-.9-.3-1.8-1a6.4 6.4 0 0 1-1.2-1.5c-.1-.2 0-.3.1-.4.1-.1.2-.2.3-.4.1-.1 0-.2 0-.3 0-.1-.6-1.4-.8-1.9-.2-.5-.4-.4-.6-.4-.2 0-.3 0-.5 0-.2 0-.4 0-.6.2-.2.2-.7.7-.7 1.8.1 1.1.7 2.1 1.6 3 .9.9 2.1 1.5 3.3 1.7 1.1.2 1.6-.4 1.8-.7.2-.3.2-.5.2-.6 0-.1 0-.2-.2-.3Z" fill="#25d366"/>
+        </svg>
+      </a>
+    </div>
+    <div class="courses-button">
       <button onclick="window.location.href='mailto:info@yogaacademy.com'">Send an Email</button>
     </div>
   </section>
