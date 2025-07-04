@@ -6,7 +6,8 @@
   <title>Jai Arudra Yoga Academy - World's Youngest Yoga Trainer</title>
   <meta name="description" content="Join world-class yoga sessions in Chennai with Jai Arudra, Guinness World Record Holder. Transform your body and mind through holistic yoga courses for all levels.">
   <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f9d8-200d-2642-fe0f.png">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     :root {
       --about-bg: #e3f2fd;
@@ -19,6 +20,7 @@
       --main-blue: #1976d2;
       --main-cyan: #0097a7;
       --main-lime: #8bc34a;
+      --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
     }
     html { scroll-behavior: smooth; }
     body {
@@ -28,6 +30,7 @@
       color: #333;
       font-size: 1.15rem;
       line-height: 1.7;
+      overflow-x: hidden;
     }
     nav {
       background: linear-gradient(90deg, #f8fafc 0%, #e8f5e9 100%);
@@ -36,8 +39,13 @@
       box-shadow: 0 2px 8px rgba(60,60,60,0.04);
       position: sticky;
       top: 0;
-      z-index: 10;
-      transition: min-height 0.25s;
+      z-index: 100;
+      transition: min-height 0.25s, background 0.3s;
+    }
+    nav.scrolled {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
     }
     @media (min-width: 900px) {
       nav { min-height: 86px; }
@@ -56,6 +64,11 @@
       font-size: 1.7rem;
       color: var(--main-green);
       margin: 0 0 0.2rem 0;
+      transition: all 0.3s;
+    }
+    .nav-left:hover h1 {
+      transform: scale(1.03);
+      color: #388e3c;
     }
     .nav-left p {
       margin: 0;
@@ -76,12 +89,27 @@
       text-decoration: none;
       font-weight: 500;
       color: #333;
-      transition: color 0.2s;
+      transition: color 0.2s, transform 0.2s;
       font-size: 1.03rem;
       white-space: nowrap;
+      position: relative;
     }
     .nav-center a:hover {
       color: var(--main-green);
+      transform: translateY(-2px);
+    }
+    .nav-center a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -4px;
+      left: 0;
+      background-color: var(--main-green);
+      transition: width 0.3s ease;
+    }
+    .nav-center a:hover::after {
+      width: 100%;
     }
     .nav-right {
       display: flex;
@@ -98,13 +126,32 @@
       color: white;
       font-size: 1rem;
       cursor: pointer;
-      transition: background 0.2s;
+      transition: all 0.3s;
       margin-left: 0.2rem;
       margin-right: 0.2rem;
       white-space: nowrap;
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+    }
+    .nav-right button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.2);
+      transition: width 0.5s ease;
+      z-index: -1;
     }
     .nav-right button:hover {
       background: #388e3c;
+      transform: translateY(-3px);
+      box-shadow: 0 6px 15px rgba(76, 175, 80, 0.3);
+    }
+    .nav-right button:hover::before {
+      width: 100%;
     }
     @media (max-width: 900px) {
       .nav-container {
@@ -138,12 +185,39 @@
       }
     }
 
+    /* Enhanced Hero with Parallax */
     .hero {
       background: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.35)),
                   url('https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80') 
                   no-repeat center center/cover;
+      background-attachment: fixed;
       text-align: center;
-      padding: 6rem 1rem 6rem 1rem;
+      padding: 9rem 1rem 10rem 1rem;
+      position: relative;
+      overflow: hidden;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, rgba(76, 175, 80, 0.1), rgba(25, 118, 210, 0.1));
+      opacity: 0.2;
+    }
+    .hero-content {
+      max-width: 900px;
+      position: relative;
+      z-index: 2;
+      animation: fadeInUp 1s ease-out forwards;
+      opacity: 0;
+      transform: translateY(30px);
     }
     .hero h1,
     .hero .subtitle,
@@ -153,22 +227,31 @@
     }
     .hero h1 {
       font-family: 'Playfair Display', serif;
-      font-size: 2.4rem;
+      font-size: 3.2rem;
       margin-bottom: 0.5rem;
+      animation: fadeInUp 1s ease-out 0.2s forwards;
+      opacity: 0;
+      transform: translateY(30px);
     }
     .hero .subtitle {
-      font-size: 1.27rem;
+      font-size: 1.5rem;
       color: #e3f2fd;
       margin: 0 auto 1.2rem auto;
       font-weight: 500;
       letter-spacing: 0.03em;
+      animation: fadeInUp 1s ease-out 0.4s forwards;
+      opacity: 0;
+      transform: translateY(30px);
     }
     .hero p {
-      font-size: 1.18rem;
+      font-size: 1.25rem;
       margin-bottom: 2.1rem;
-      max-width: 600px;
+      max-width: 700px;
       margin-left: auto;
       margin-right: auto;
+      animation: fadeInUp 1s ease-out 0.6s forwards;
+      opacity: 0;
+      transform: translateY(30px);
     }
     .main-button {
       padding: 18px 56px;
@@ -179,13 +262,34 @@
       border: none;
       cursor: pointer;
       box-shadow: 0 2px 10px rgba(60, 180, 80, 0.10);
-      transition: background 0.22s, transform 0.16s;
+      transition: all 0.3s;
       margin-top: 1.5rem;
       font-family: 'Poppins', Arial, sans-serif;
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+      animation: fadeInUp 1s ease-out 0.8s forwards, pulse 2s ease-in-out 2s 3;
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    .main-button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.2);
+      transition: width 0.5s ease;
+      z-index: -1;
     }
     .main-button:hover {
       background: #388e3c;
-      transform: scale(1.05);
+      transform: scale(1.05) translateY(-5px);
+      box-shadow: 0 8px 20px rgba(76, 175, 80, 0.3);
+    }
+    .main-button:hover::before {
+      width: 100%;
     }
 
     .wave-separator {
@@ -204,19 +308,36 @@
       max-width: 1000px;
       margin: 4rem auto;
       border-radius: 18px;
-      box-shadow: 0 2px 8px rgba(60, 60, 60, 0.07);
+      box-shadow: var(--shadow);
       opacity: 0;
       transform: translateY(40px);
       transition: opacity 0.6s, transform 0.6s;
       scroll-margin-top: 110px;
     }
-    .section.visible { opacity: 1; transform: translateY(0);}
+    .section.visible { 
+      opacity: 1; 
+      transform: translateY(0);
+      animation: floatUp 0.8s ease-out forwards;
+    }
     h2 {
       text-align: center;
       font-family: 'Playfair Display', serif;
-      font-size: 2rem;
+      font-size: 2.4rem;
       color: var(--main-green);
       margin-bottom: 1.1rem;
+      position: relative;
+      padding-bottom: 0.5rem;
+    }
+    h2::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background: var(--main-green);
+      border-radius: 2px;
     }
     .section-content, .about-content {
       display: flex;
@@ -230,7 +351,7 @@
       width: 110px;
       height: 110px;
       border-radius: 16px;
-      box-shadow: 0 1px 8px rgba(60,60,60,0.07);
+      box-shadow: var(--shadow);
       background: #fff;
       padding: 18px;
       margin-bottom: 1.2rem;
@@ -239,7 +360,7 @@
     .about-content svg.icon:hover,
     .section-content svg.icon:hover {
       transform: scale(1.08) rotate(-2deg);
-      box-shadow: 0 4px 20px rgba(60,60,60,0.12);
+      box-shadow: 0 8px 25px rgba(60,60,60,0.15);
     }
     .about-content p, .section-content p {
       max-width: 520px;
@@ -261,13 +382,31 @@
       color: white;
       border: none;
       cursor: pointer;
-      transition: background 0.2s, transform 0.15s;
-      box-shadow: 0 2px 8px rgba(76, 175, 80, 0.12);
+      transition: all 0.3s;
+      box-shadow: 0 4px 15px rgba(76, 175, 80, 0.15);
       font-family: 'Poppins', Arial, sans-serif;
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+    }
+    .courses-button button::before, .section-content button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.2);
+      transition: width 0.5s ease;
+      z-index: -1;
     }
     .courses-button button:hover, .section-content button:hover {
       background-color: #388e3c;
-      transform: scale(1.04);
+      transform: scale(1.04) translateY(-3px);
+      box-shadow: 0 8px 20px rgba(76, 175, 80, 0.25);
+    }
+    .courses-button button:hover::before, .section-content button:hover::before {
+      width: 100%;
     }
 
     #about { background: var(--about-bg); }
@@ -287,18 +426,21 @@
       max-width: 230px;
       width: 100%;
       border-radius: 16px;
-      box-shadow: 0 2px 8px #0001;
+      box-shadow: var(--shadow);
       object-fit: cover;
       aspect-ratio: 4/3;
       background: #fff;
-      transition: transform 0.15s, box-shadow 0.15s;
+      transition: transform 0.3s, box-shadow 0.3s, filter 0.3s;
+      filter: grayscale(0.2);
     }
     .gallery-grid img:hover {
       transform: scale(1.04) rotate(-2deg);
       box-shadow: 0 8px 32px #1976d220;
+      filter: grayscale(0);
+      z-index: 2;
     }
 
-    /* Testimonials Slider */
+    /* Testimonials Slider - Centered Arrows */
     .testimonials-slider-container {
       position: relative;
       max-width: 900px;
@@ -315,7 +457,7 @@
     .testimonial {
       background: #fff;
       border-radius: 16px;
-      box-shadow: 0 2px 12px #607d8b15;
+      box-shadow: var(--shadow);
       padding: 2rem 1.5rem;
       max-width: 400px;
       min-width: 280px;
@@ -324,13 +466,21 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      transition: transform .15s, box-shadow .15s;
+      transition: transform .3s, box-shadow .3s;
       flex-shrink: 0;
       text-align: center;
+      position: relative;
+      opacity: 0.8;
+      transform: scale(0.95);
+    }
+    .testimonial.active {
+      opacity: 1;
+      transform: scale(1);
+      z-index: 1;
     }
     .testimonial:hover {
-      transform: scale(1.04) rotate(-2deg);
-      box-shadow: 0 8px 32px #1976d220;
+      transform: scale(1.04);
+      box-shadow: 0 12px 30px #1976d230;
     }
     .testimonial-quote {
       font-size: 1.15rem;
@@ -338,6 +488,17 @@
       font-style: italic;
       margin-bottom: 1.3rem;
       text-align: center;
+      position: relative;
+    }
+    .testimonial-quote::before {
+      content: """;
+      position: absolute;
+      top: -20px;
+      left: -10px;
+      font-size: 4rem;
+      color: var(--main-green);
+      opacity: 0.2;
+      font-family: serif;
     }
     .testimonial-name {
       font-weight: bold;
@@ -345,36 +506,44 @@
       text-align: center;
       font-size: 1.08rem;
     }
+    .testimonial-avatar {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      margin-bottom: 1rem;
+      border: 3px solid var(--main-green);
+      object-fit: cover;
+    }
     .testimonials-slider-arrow {
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
       background: #fff;
-      color: #1976d2;
+      color: var(--main-blue);
       border: none;
       border-radius: 50%;
-      font-size: 2rem;
+      font-size: 1.5rem;
       width: 48px;
       height: 48px;
       cursor: pointer;
-      box-shadow: 0 2px 8px #0002;
+      box-shadow: var(--shadow);
       z-index: 2;
       outline: none;
-      transition: background 0.2s, color 0.2s;
+      transition: all 0.3s;
       display: flex;
       align-items: center;
       justify-content: center;
     }
-    .testimonials-slider-arrow:active,
-    .testimonials-slider-arrow:focus {
-      background: #e3f2fd;
-      color: #388e3c;
+    .testimonials-slider-arrow:hover {
+      background: var(--main-blue);
+      color: white;
+      transform: translateY(-50%) scale(1.1);
     }
     .testimonials-slider-arrow.left {
-      left: -10px;
+      left: 15px;
     }
     .testimonials-slider-arrow.right {
-      right: -10px;
+      right: 15px;
     }
     .testimonials-slider-dots {
       text-align: center;
@@ -388,16 +557,20 @@
       background: #b0bec5;
       margin: 0 6px;
       cursor: pointer;
-      transition: background 0.2s;
+      transition: all 0.3s;
     }
     .testimonials-slider-dot.active {
-      background: #1976d2;
+      background: var(--main-blue);
+      transform: scale(1.2);
+    }
+    .testimonials-slider-dot:hover {
+      transform: scale(1.3);
     }
 
     @media (max-width: 900px) {
       .testimonial { max-width: 90vw; min-width: 80vw;}
-      .testimonials-slider-arrow.left { left: 2px; }
-      .testimonials-slider-arrow.right { right: 2px; }
+      .testimonials-slider-arrow.left { left: 8px; }
+      .testimonials-slider-arrow.right { right: 8px; }
     }
     @media (max-width: 700px) {
       .section { padding: 2rem 0.5rem; margin: 2rem auto; }
@@ -409,17 +582,41 @@
     .contact-socials {
       margin-top: 1.5rem;
       display: flex;
-      gap: 18px;
+      gap: 22px;
       justify-content: center;
     }
+    .contact-socials a {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: white;
+      box-shadow: var(--shadow);
+      transition: all 0.3s;
+    }
+    .contact-socials a:hover {
+      transform: translateY(-5px) rotate(5deg);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    }
+    .contact-socials a.facebook:hover {
+      background: #1877f2;
+    }
+    .contact-socials a.instagram:hover {
+      background: #e1306c;
+    }
+    .contact-socials a.whatsapp:hover {
+      background: #25d366;
+    }
     .contact-socials a svg {
-      width: 32px; height: 32px;
-      transition: transform 0.17s, filter 0.17s;
-      filter: grayscale(0.2) brightness(0.93);
+      width: 24px; 
+      height: 24px;
+      transition: all 0.3s;
     }
     .contact-socials a:hover svg {
-      transform: scale(1.2) rotate(-8deg);
-      filter: brightness(1.22);
+      transform: scale(1.2);
+      filter: brightness(2);
     }
 
     .contact-form {
@@ -428,11 +625,16 @@
       padding: 1.5rem;
       background: #fff;
       border-radius: 16px;
-      box-shadow: 0 2px 16px rgba(60,60,60,0.08);
+      box-shadow: var(--shadow);
       display: flex;
       flex-direction: column;
       gap: 1.2rem;
       box-sizing: border-box;
+      transition: all 0.4s;
+    }
+    .contact-form:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
     }
     .contact-form .form-row {
       display: flex;
@@ -447,13 +649,14 @@
       background: #f8fafc;
       font-family: inherit;
       resize: none;
-      transition: border 0.18s;
+      transition: all 0.3s;
       box-sizing: border-box;
     }
     .contact-form input:focus, .contact-form textarea:focus {
       outline: none;
-      border: 1.5px solid #4caf50;
+      border: 1.5px solid var(--main-green);
       background: #fff;
+      box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
     }
     .contact-form button[type="submit"] {
       margin-top: 0.7rem;
@@ -465,12 +668,29 @@
       font-size: 1.12rem;
       letter-spacing: 0.01em;
       cursor: pointer;
-      box-shadow: 0 2px 8px rgba(76, 175, 80, 0.10);
-      transition: background 0.18s, transform 0.15s;
+      box-shadow: 0 4px 12px rgba(76, 175, 80, 0.15);
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .contact-form button[type="submit"]::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.2);
+      transition: width 0.5s ease;
+      z-index: 1;
     }
     .contact-form button[type="submit"]:hover {
       background: #388e3c;
-      transform: scale(1.04);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(76, 175, 80, 0.3);
+    }
+    .contact-form button[type="submit"]:hover::before {
+      width: 100%;
     }
     .formspree-success {
       display: none;
@@ -479,6 +699,7 @@
       text-align: center;
       font-weight: 500;
       font-size: 1.1rem;
+      animation: fadeIn 0.5s ease-out;
     }
     @media (max-width: 700px) {
       .contact-form { padding: 1.1rem; max-width: 95%; }
@@ -487,11 +708,22 @@
     footer {
       text-align: center;
       color: #888;
-      background: #f0f4f1;
+      background: linear-gradient(to right, #f0f4f1, #e8f5e9);
       padding: 1.3rem 0;
       margin-top: 0;
       font-size: 1.07rem;
       letter-spacing: 0.04em;
+      position: relative;
+      overflow: hidden;
+    }
+    footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, var(--main-green), var(--main-blue));
     }
     @media (max-width: 800px) {
       .nav-container { flex-direction: column; gap: 0.6rem;}
@@ -500,117 +732,41 @@
       .main-button { padding: 12px 22px; font-size: 1rem;}
       .courses-button button, .section-content button { padding: 10px 19px; font-size: 0.97rem;}
     }
+    
+    /* Animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    @keyframes floatUp {
+      0% {
+        transform: translateY(20px);
+        opacity: 0;
+      }
+      100% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
   </style>
-  <script>
-    // Section reveal animation on scroll
-    window.addEventListener('scroll', () => {
-      document.querySelectorAll('.section').forEach(section => {
-        const rect = section.getBoundingClientRect();
-        if (rect.top < window.innerHeight - 50) {
-          section.classList.add('visible');
-        }
-      });
-    });
-    window.addEventListener('DOMContentLoaded', () => {
-      document.querySelectorAll('.section').forEach(section => {
-        const rect = section.getBoundingClientRect();
-        if (rect.top < window.innerHeight - 50) {
-          section.classList.add('visible');
-        }
-      });
-
-      // Formspree AJAX Success Message
-      document.querySelectorAll('.contact-form').forEach(function(form){
-        form.addEventListener('submit', function(e){
-          e.preventDefault();
-          var data = new FormData(form);
-          fetch(form.action, {
-            method: 'POST',
-            body: data,
-            headers: { 'Accept': 'application/json' }
-          }).then(function(response){
-            if (response.ok) {
-              form.reset();
-              form.querySelector('.formspree-success').style.display = 'block';
-            }
-          });
-        });
-      });
-
-      // Testimonials Slider Logic
-      const testimonials = [
-        {
-          quote: "Jai's classes changed my life! I feel stronger, more flexible, and so much calmer.",
-          name: "— Aishwarya P."
-        },
-        {
-          quote: "The personal attention and encouragement helped me master new poses I never thought possible.",
-          name: "— Rahul S."
-        },
-        {
-          quote: "Best yoga community in Chennai. Highly recommended for all levels.",
-          name: "— Kavitha M."
-        },
-        {
-          quote: "I have tried many yoga classes before, but this is the only one that truly helped my back pain.",
-          name: "— Deepak R."
-        }
-      ];
-      let current = 0;
-      let autoSlideTimer = null;
-
-      function renderTestimonials() {
-        const track = document.querySelector('.testimonials-slider-track');
-        if (!track) return;
-        track.innerHTML = '';
-        const t = testimonials[current];
-        const tmpl = document.createElement('div');
-        tmpl.className = 'testimonial';
-        tmpl.innerHTML = `<div class="testimonial-quote">“${t.quote}”</div><div class="testimonial-name">${t.name}</div>`;
-        track.appendChild(tmpl);
-        document.querySelectorAll('.testimonials-slider-dot').forEach((dot, i) => {
-          dot.classList.toggle('active', i === current);
-        });
-      }
-      function nextTestimonial() {
-        current = (current + 1) % testimonials.length;
-        renderTestimonials();
-      }
-      function prevTestimonial() {
-        current = (current - 1 + testimonials.length) % testimonials.length;
-        renderTestimonials();
-      }
-      function setTestimonial(idx) {
-        current = idx;
-        renderTestimonials();
-      }
-      function startAutoSlide() {
-        clearInterval(autoSlideTimer);
-        autoSlideTimer = setInterval(nextTestimonial, 6000);
-      }
-      setTimeout(() => {
-        const dots = document.querySelector('.testimonials-slider-dots');
-        if (dots) {
-          dots.innerHTML = '';
-          for (let i = 0; i < testimonials.length; ++i) {
-            const dot = document.createElement('span');
-            dot.className = 'testimonials-slider-dot' + (i === 0 ? ' active':'');
-            dot.addEventListener('click', ()=>{ setTestimonial(i); startAutoSlide(); });
-            dots.appendChild(dot);
-          }
-        }
-        document.querySelector('.testimonials-slider-arrow.left')
-          .addEventListener('click', ()=>{ prevTestimonial(); startAutoSlide(); });
-        document.querySelector('.testimonials-slider-arrow.right')
-          .addEventListener('click', ()=>{ nextTestimonial(); startAutoSlide(); });
-        renderTestimonials();
-        startAutoSlide();
-      }, 200);
-    });
-  </script>
 </head>
 <body>
-  <nav>
+  <nav id="navbar">
     <div class="nav-container">
       <div class="nav-left">
         <h1>Jai Arudra</h1>
@@ -619,8 +775,9 @@
       <div class="nav-center">
         <a href="#home">Home</a>
         <a href="#about">About</a>
-        <a href="courses.html">Courses</a>
+        <a href="#courses">Courses</a>
         <a href="#gallery">Gallery</a>
+        <a href="#testimonials">Testimonials</a>
         <a href="#contact">Contact</a>
       </div>
       <div class="nav-right">
@@ -631,21 +788,22 @@
   </nav>
 
   <section class="hero" id="home">
-    <h1>Awaken Your Mind. Transform Your Body.</h1>
-    <p class="subtitle">
-      With Jai Arudra, World's Youngest Yoga Trainer
-    </p>
-    <p>
-      Join world-class yoga sessions led by the Guinness World Record Holder as the world's youngest yoga trainer.
-      Discover the true power of yoga for every body and every mind, right here in Chennai.
-    </p>
-    <button class="main-button" onclick="window.location.href='courses.html'">Explore Our Courses</button>
+    <div class="hero-content">
+      <h1>Awaken Your Mind. Transform Your Body.</h1>
+      <p class="subtitle">
+        With Jai Arudra, World's Youngest Yoga Trainer
+      </p>
+      <p>
+        Join world-class yoga sessions led by the Guinness World Record Holder as the world's youngest yoga trainer.
+        Discover the true power of yoga for every body and every mind, right here in Chennai.
+      </p>
+      <button class="main-button" onclick="window.location.href='#courses'">Explore Our Courses</button>
+    </div>
   </section>
 
   <section class="section" id="about">
     <h2>About Me</h2>
     <div class="about-content">
-      <!-- Modern SVG Yoga icon -->
       <svg class="icon" viewBox="0 0 48 48" fill="none"><ellipse cx="24" cy="12" rx="7" ry="7" fill="#d81b60"/><rect x="21" y="19" width="6" height="20" rx="3" fill="#d81b60"/><rect x="31" y="30" width="6" height="14" rx="3" transform="rotate(30 31 30)" fill="#d81b60"/><rect x="11" y="30" width="6" height="14" rx="3" transform="rotate(-30 11 30)" fill="#d81b60"/></svg>
       <p>
         Hello! I am Jai Arudra, the world's youngest yoga trainer and a dedicated yoga practitioner.
@@ -662,7 +820,6 @@
   <section class="section" id="courses">
     <h2>Our Courses</h2>
     <div class="section-content">
-      <!-- Modern SVG courses icon -->
       <svg class="icon" viewBox="0 0 48 48" fill="none"><rect x="6" y="12" width="36" height="24" rx="4" fill="#1976d2"/><rect x="12" y="18" width="24" height="12" rx="2" fill="#fff"/><rect x="20" y="26" width="8" height="2" rx="1" fill="#1976d2"/></svg>
       <p>
         We offer thoughtfully designed yoga courses for all levels: <strong>Beginner</strong>, <strong>Intermediate</strong>, and <strong>Advanced</strong>.
@@ -670,7 +827,7 @@
       </p>
     </div>
     <div class="courses-button">
-      <button onclick="window.location.href='courses.html'">View All Courses</button>
+      <button>View All Courses</button>
     </div>
   </section>
 
@@ -718,7 +875,6 @@
   <section class="section" id="contact">
     <h2>Contact Me</h2>
     <div class="section-content">
-      <!-- Modern SVG contact icon -->
       <svg class="icon" viewBox="0 0 48 48" fill="none"><rect x="8" y="14" width="32" height="20" rx="4" fill="#8bc34a"/><rect x="14" y="20" width="20" height="2" rx="1" fill="#fff"/><rect x="14" y="26" width="12" height="2" rx="1" fill="#fff"/></svg>
       <p>
         <strong>Email:</strong> info@jaiarudrayoga.com<br>
@@ -736,26 +892,17 @@
       <div class="formspree-success">Thank you! Your message has been sent.</div>
     </form>
     <div class="contact-socials">
-      <!-- Instagram -->
-      <a href="https://instagram.com/" target="_blank" aria-label="Instagram">
-        <svg viewBox="0 0 32 32" fill="none">
-          <rect width="32" height="32" rx="8" fill="#fff"/>
-          <path d="M16 11.2a4.8 4.8 0 1 0 0 9.6 4.8 4.8 0 0 0 0-9.6Zm0 7.9a3.1 3.1 0 1 1 0-6.2 3.1 3.1 0 0 1 0 6.2ZM21.5 10.7a1.1 1.1 0 1 1-2.2 0 1.1 1.1 0 0 1 2.2 0ZM24.1 12.4c-.2-1.2-.7-2.2-1.4-3-.8-.8-1.8-1.3-3-1.4-1.2-.2-4.8-.2-6 0-1.2.2-2.2.7-3 1.4-.8.8-1.3 1.8-1.4 3-.2 1.2-.2 4.8 0 6 .2 1.2.7 2.2 1.4 3 .8.8 1.8 1.3 3 1.4 1.2.2 4.8.2 6 0 1.2-.2 2.2-.7 3-1.4.8-.8 1.3-1.8 1.4-3 .2-1.2.2-4.8 0-6Zm-2 7.2a3.5 3.5 0 0 1-2 .5c-1.1.1-4.6.1-5.7 0a3.5 3.5 0 0 1-2-.5 3.5 3.5 0 0 1-1.3-1.3 3.5 3.5 0 0 1-.5-2c-.1-1.1-.1-4.6 0-5.7a3.5 3.5 0 0 1 .5-2c.3-.5.8-1 1.3-1.3a3.5 3.5 0 0 1 2-.5c1.1-.1 4.6-.1 5.7 0a3.5 3.5 0 0 1 2 .5c.5.3 1 .8 1.3 1.3.3.5.5 1.1.5 2 .1 1.1.1 4.6 0 5.7a3.5 3.5 0 0 1-.5 2c-.3.5-.8 1-1.3 1.3Z" fill="#d81b60"/>
-        </svg>
+      <a href="https://instagram.com/" target="_blank" aria-label="Instagram" class="instagram">
+        <i class="fab fa-instagram" style="color: #E1306C;"></i>
       </a>
-      <!-- Facebook -->
-      <a href="https://facebook.com/" target="_blank" aria-label="Facebook">
-        <svg viewBox="0 0 32 32" fill="none">
-          <rect width="32" height="32" rx="8" fill="#fff"/>
-          <path d="M20.7 17.3l.4-2.7h-2.6v-1.8c0-.7.2-1.2 1.2-1.2h1.4V9.4A17.3 17.3 0 0 0 19 9.3c-2 0-3.2 1.2-3.2 3.3v2h-2v2.7h2v6.6h2.4v-6.6h2.1Z" fill="#1877f3"/>
-        </svg>
+      <a href="https://facebook.com/" target="_blank" aria-label="Facebook" class="facebook">
+        <i class="fab fa-facebook-f" style="color: #1877F2;"></i>
       </a>
-      <!-- WhatsApp -->
-      <a href="https://wa.me/" target="_blank" aria-label="WhatsApp">
-        <svg viewBox="0 0 32 32" fill="none">
-          <rect width="32" height="32" rx="8" fill="#fff"/>
-          <path d="M16 8.4a7.6 7.6 0 0 0-6.6 11.4l-1 3.6 3.7-1a7.6 7.6 0 1 0 3.9-14Zm0 13.8a6.3 6.3 0 0 1-3.2-.9l-.2-.1-2.2.6.6-2.1-.1-.2a6.3 6.3 0 1 1 5.1 2.7Zm3.4-4.5c-.2-.1-1.2-.6-1.4-.7-.2-.1-.4-.1-.6.1-.2.2-.7.7-.8.9-.1.2-.3.2-.5.1-.2-.1-.9-.3-1.8-1a6.4 6.4 0 0 1-1.2-1.5c-.1-.2 0-.3.1-.4.1-.1.2-.2.3-.4.1-.1 0-.2 0-.3 0-.1-.6-1.4-.8-1.9-.2-.5-.4-.4-.6-.4-.2 0-.3 0-.5 0-.2 0-.4 0-.6.2-.2.2-.7.7-.7 1.8.1 1.1.7 2.1 1.6 3 .9.9 2.1 1.5 3.3 1.7 1.1.2 1.6-.4 1.8-.7.2-.3.2-.5.2-.6 0-.1 0-.2-.2-.3Z" fill="#25d366"/>
-        </svg>
+      <a href="https://wa.me/" target="_blank" aria-label="WhatsApp" class="whatsapp">
+        <i class="fab fa-whatsapp" style="color: #25D366;"></i>
+      </a>
+      <a href="https://youtube.com/" target="_blank" aria-label="YouTube" class="youtube">
+        <i class="fab fa-youtube" style="color: #FF0000;"></i>
       </a>
     </div>
   </section>
@@ -763,5 +910,146 @@
   <footer>
     <p>&copy; 2025 Jai Arudra Yoga Academy. All rights reserved.</p>
   </footer>
+
+  <script>
+    // Section reveal animation on scroll
+    window.addEventListener('scroll', () => {
+      document.querySelectorAll('.section').forEach(section => {
+        const rect = section.getBoundingClientRect();
+        if (rect.top < window.innerHeight - 50) {
+          section.classList.add('visible');
+        }
+      });
+      
+      // Navbar scroll effect
+      if (window.scrollY > 100) {
+        document.querySelector('nav').classList.add('scrolled');
+      } else {
+        document.querySelector('nav').classList.remove('scrolled');
+      }
+    });
+    
+    window.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.section').forEach(section => {
+        const rect = section.getBoundingClientRect();
+        if (rect.top < window.innerHeight - 50) {
+          section.classList.add('visible');
+        }
+      });
+
+      // Formspree AJAX Success Message
+      document.querySelectorAll('.contact-form').forEach(function(form){
+        form.addEventListener('submit', function(e){
+          e.preventDefault();
+          var data = new FormData(form);
+          fetch(form.action, {
+            method: 'POST',
+            body: data,
+            headers: { 'Accept': 'application/json' }
+          }).then(function(response){
+            if (response.ok) {
+              form.reset();
+              form.querySelector('.formspree-success').style.display = 'block';
+            }
+          });
+        });
+      });
+
+      // Testimonials Slider Logic
+      const testimonials = [
+        {
+          quote: "Jai's classes changed my life! I feel stronger, more flexible, and so much calmer.",
+          name: "— Aishwarya P.",
+          avatar: "https://randomuser.me/api/portraits/women/32.jpg"
+        },
+        {
+          quote: "The personal attention and encouragement helped me master new poses I never thought possible.",
+          name: "— Rahul S.",
+          avatar: "https://randomuser.me/api/portraits/men/44.jpg"
+        },
+        {
+          quote: "Best yoga community in Chennai. Highly recommended for all levels.",
+          name: "— Kavitha M.",
+          avatar: "https://randomuser.me/api/portraits/women/68.jpg"
+        },
+        {
+          quote: "I have tried many yoga classes before, but this is the only one that truly helped my back pain.",
+          name: "— Deepak R.",
+          avatar: "https://randomuser.me/api/portraits/men/22.jpg"
+        }
+      ];
+      let current = 0;
+      let autoSlideTimer = null;
+
+      function renderTestimonials() {
+        const track = document.querySelector('.testimonials-slider-track');
+        if (!track) return;
+        track.innerHTML = '';
+        
+        for (let i = 0; i < testimonials.length; i++) {
+          const t = testimonials[i];
+          const tmpl = document.createElement('div');
+          tmpl.className = 'testimonial' + (i === current ? ' active' : '');
+          tmpl.innerHTML = `
+            <img src="${t.avatar}" alt="${t.name}" class="testimonial-avatar">
+            <div class="testimonial-quote">${t.quote}</div>
+            <div class="testimonial-name">${t.name}</div>
+          `;
+          track.appendChild(tmpl);
+        }
+        
+        document.querySelectorAll('.testimonials-slider-dot').forEach((dot, i) => {
+          dot.classList.toggle('active', i === current);
+        });
+      }
+      
+      function nextTestimonial() {
+        current = (current + 1) % testimonials.length;
+        renderTestimonials();
+      }
+      
+      function prevTestimonial() {
+        current = (current - 1 + testimonials.length) % testimonials.length;
+        renderTestimonials();
+      }
+      
+      function setTestimonial(idx) {
+        current = idx;
+        renderTestimonials();
+      }
+      
+      function startAutoSlide() {
+        clearInterval(autoSlideTimer);
+        autoSlideTimer = setInterval(nextTestimonial, 5000);
+      }
+      
+      setTimeout(() => {
+        const dots = document.querySelector('.testimonials-slider-dots');
+        if (dots) {
+          dots.innerHTML = '';
+          for (let i = 0; i < testimonials.length; ++i) {
+            const dot = document.createElement('span');
+            dot.className = 'testimonials-slider-dot' + (i === 0 ? ' active' : '');
+            dot.addEventListener('click', ()=>{ setTestimonial(i); startAutoSlide(); });
+            dots.appendChild(dot);
+          }
+        }
+        
+        document.querySelector('.testimonials-slider-arrow.left')
+          .addEventListener('click', ()=>{ prevTestimonial(); startAutoSlide(); });
+        
+        document.querySelector('.testimonials-slider-arrow.right')
+          .addEventListener('click', ()=>{ nextTestimonial(); startAutoSlide(); });
+        
+        renderTestimonials();
+        startAutoSlide();
+      }, 200);
+      
+      // Initialize navbar
+      if (window.scrollY > 100) {
+        document.querySelector('nav').classList.add('scrolled');
+      }
+    });
+  </script>
 </body>
 </html>
