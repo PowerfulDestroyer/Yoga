@@ -9,7 +9,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins&display=swap" rel="stylesheet">
   <style>
     :root {
-      --about-bg: #e3f2fd; /* Calming blue for About section */
+      --about-bg: #e3f2fd;
       --courses-bg: #e3f2fd;
       --gallery-bg: #e0f7fa;
       --contact-bg: #f1f8e9;
@@ -149,9 +149,9 @@
     }
 
     .section {
-      padding: 3rem 1rem;
+      padding: 4rem 1rem;
       max-width: 1000px;
-      margin: 0 auto;
+      margin: 4rem auto;
       border-radius: 18px;
       box-shadow: 0 2px 8px rgba(60, 60, 60, 0.07);
       opacity: 0;
@@ -296,6 +296,7 @@
       font-size: 1.1rem;
     }
     @media (max-width: 700px) {
+      .section { padding: 2rem 0.5rem; margin: 2rem auto; }
       .contact-form { padding: 1.1rem 0.4rem; }
       .contact-form .form-row { flex-direction: column; gap: 0.8rem; }
     }
@@ -311,7 +312,6 @@
     @media (max-width: 800px) {
       .nav-container { flex-direction: column; gap: 0.6rem;}
       .section-content, .about-content {flex-direction: column;}
-      .section { padding: 2rem 0.5rem;}
       .about-content svg.icon, .section-content svg.icon { width:70px; height:70px; padding:10px;}
       .main-button { padding: 12px 22px; font-size: 1rem;}
       .courses-button button, .section-content button { padding: 10px 19px; font-size: 0.97rem;}
@@ -484,9 +484,6 @@
           <path d="M16 8.4a7.6 7.6 0 0 0-6.6 11.4l-1 3.6 3.7-1a7.6 7.6 0 1 0 3.9-14Zm0 13.8a6.3 6.3 0 0 1-3.2-.9l-.2-.1-2.2.6.6-2.1-.1-.2a6.3 6.3 0 1 1 5.1 2.7Zm3.4-4.5c-.2-.1-1.2-.6-1.4-.7-.2-.1-.4-.1-.6.1-.2.2-.7.7-.8.9-.1.2-.3.2-.5.1-.2-.1-.9-.3-1.8-1a6.4 6.4 0 0 1-1.2-1.5c-.1-.2 0-.3.1-.4.1-.1.2-.2.3-.4.1-.1 0-.2 0-.3 0-.1-.6-1.4-.8-1.9-.2-.5-.4-.4-.6-.4-.2 0-.3 0-.5 0-.2 0-.4 0-.6.2-.2.2-.7.7-.7 1.8.1 1.1.7 2.1 1.6 3 .9.9 2.1 1.5 3.3 1.7 1.1.2 1.6-.4 1.8-.7.2-.3.2-.5.2-.6 0-.1 0-.2-.2-.3Z" fill="#25d366"/>
         </svg>
       </a>
-    </div>
-    <div class="courses-button">
-      <button onclick="window.location.href='mailto:info@yogaacademy.com'">Send an Email</button>
     </div>
   </section>
 
